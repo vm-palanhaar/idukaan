@@ -21,17 +21,13 @@ final GoRouter routerConfig = GoRouter(
           routes: <RouteBase>[
             GoRoute(
               path: 'login',
-              builder: (context, state) {
-                return const UserLoginScreen();
-              },
+              builder: (context, state) => const UserLoginScreen(),
             ),
             GoRoute(
-                path: 'signup',
-                builder: (context, state) {
-                  return const UserSignupView();
-                }
+              path: 'signup',
+              builder: (context, state) => const UserSignupView(),
             ),
-          ]
+          ],
         ),
       ],
     ),
