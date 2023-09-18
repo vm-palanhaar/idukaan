@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:idukaan/model/init/init_data.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/util/texts.dart';
@@ -35,11 +36,13 @@ class InitScreen extends StatelessWidget {
               ListTile(
                 title: Text(InitData.login.name),
                 trailing: Icon(InitData.login.icon),
+                onTap: () => context.go('/idukaan/user/login'),
               ),
               const Divider(),
               ListTile(
                 title: Text(InitData.signUp.name),
                 trailing: Icon(InitData.signUp.icon),
+                onTap: () => context.go('/idukaan/user/signup'),
               ),
               const Divider(),
               ListTile(
