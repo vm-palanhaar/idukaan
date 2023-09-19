@@ -1,15 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:idukaan/controller/user/user_ctrl.dart';
 import 'package:idukaan/model/init/init_data.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/util/texts.dart';
+import 'package:provider/provider.dart';
 
-class InitScreen extends StatelessWidget {
+class InitScreen extends StatefulWidget {
   const InitScreen({super.key});
 
   @override
+  State<InitScreen> createState() => _InitScreenState();
+}
+
+class _InitScreenState extends State<InitScreen> {
+  @override
+  void initState() {
+    isUserLoggedIn();
+    super.initState();
+  }
+
+  Future<void> isUserLoggedIn() async {}
+
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return ChangeNotifierProvider(
+      create: (_) => UserCtrl(),
       child: Scaffold(
         appBar: AppBar(
           leading: Container(
