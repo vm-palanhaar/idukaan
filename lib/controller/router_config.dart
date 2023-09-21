@@ -1,6 +1,9 @@
 import 'package:go_router/go_router.dart';
 import 'package:idukaan/view/init_screen.dart';
 import 'package:idukaan/view/user/login/user_login_screen.dart';
+import 'package:idukaan/view/user/signup/user_signup_1_screen.dart';
+import 'package:idukaan/view/user/signup/user_signup_2_screen.dart';
+import 'package:idukaan/view/user/signup/user_signup_3_screen.dart';
 import 'package:idukaan/view/user/signup/user_signup_view.dart';
 
 final GoRouter routerConfig = GoRouter(
@@ -26,6 +29,20 @@ final GoRouter routerConfig = GoRouter(
             GoRoute(
               path: 'signup',
               builder: (context, state) => const UserSignupView(),
+              routes: <RouteBase>[
+                GoRoute(
+                  path: '1',
+                  builder: (context, state) => const UserSignup1Screen(),
+                ),
+                GoRoute(
+                  path: '2',
+                  builder: (context, state) => const UserSignup2Screen(),
+                ),
+                GoRoute(
+                  path: '3',
+                  builder: (context, state) => const UserSignup3Screen(),
+                ),
+              ],
             ),
           ],
         ),

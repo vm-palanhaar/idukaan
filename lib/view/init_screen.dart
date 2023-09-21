@@ -27,52 +27,59 @@ class _InitScreenState extends State<InitScreen> {
     return ChangeNotifierProvider(
       create: (_) => UserCtrl(),
       child: Scaffold(
-        appBar: AppBar(
-          leading: Container(
-            margin: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.01,
+        body: SafeArea(
+          child: Container(
+            margin: screenMargin(context),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.06,
+                      margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.01,
+                      ),
+                      child: const Image(
+                        image: AssetImage('assets/images/idukaan.png'),
+                      ),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                boldSizeText(
+                  text: 'Welcome to\niDukaan by Palanhaar',
+                  size: MediaQuery.of(context).size.height * 0.03,
+                ),
+                const Spacer(),
+                const Divider(),
+                ListTile(
+                  title: Text(InitData.login.name),
+                  trailing: Icon(InitData.login.icon),
+                  onTap: () => context.go('/idukaan/user/login'),
+                ),
+                const Divider(),
+                ListTile(
+                  title: Text(InitData.signUp.name),
+                  trailing: Icon(InitData.signUp.icon),
+                  onTap: () {
+                    context.push('/idukaan/user/signup/1');
+                  },
+                ),
+                const Divider(),
+                ListTile(
+                  title: Text(InitData.intro.name),
+                  trailing: Icon(InitData.intro.icon),
+                ),
+                const Divider(),
+                const Spacer(),
+                boldSizeText(
+                  text: '',
+                  size: MediaQuery.of(context).size.height * 0.03,
+                ),
+                const Spacer(),
+              ],
             ),
-            child: const Image(
-              image: AssetImage('assets/images/idukaan.png'),
-            ),
-          ),
-        ),
-        body: Container(
-          margin: screenMargin(context),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Spacer(),
-              boldSizeText(
-                text: 'Welcome to\niDukaan by Palanhaar',
-                size: MediaQuery.of(context).size.height * 0.03,
-              ),
-              const Spacer(),
-              const Divider(),
-              ListTile(
-                title: Text(InitData.login.name),
-                trailing: Icon(InitData.login.icon),
-                onTap: () => context.go('/idukaan/user/login'),
-              ),
-              const Divider(),
-              ListTile(
-                title: Text(InitData.signUp.name),
-                trailing: Icon(InitData.signUp.icon),
-                onTap: () => context.go('/idukaan/user/signup'),
-              ),
-              const Divider(),
-              ListTile(
-                title: Text(InitData.intro.name),
-                trailing: Icon(InitData.intro.icon),
-              ),
-              const Divider(),
-              const Spacer(),
-              boldSizeText(
-                text: '',
-                size: MediaQuery.of(context).size.height * 0.03,
-              ),
-              const Spacer(),
-            ],
           ),
         ),
       ),

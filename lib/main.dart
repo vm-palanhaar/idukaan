@@ -23,10 +23,10 @@ class IDukaan extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'iDukaan',
-      theme: ThemeData(
+      /*theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
-      ),
+      ),*/
       routerConfig: routerConfig,
     );
   }
