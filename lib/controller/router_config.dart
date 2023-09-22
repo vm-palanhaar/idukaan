@@ -9,40 +9,38 @@ import 'package:idukaan/view/user/signup/user_signup_view.dart';
 final GoRouter routerConfig = GoRouter(
   initialLocation: '/idukaan/user',
   routes: <RouteBase>[
-    GoRoute(
-      path: '/idukaan',
+    // TODO : Create iDukaan Features Page and APIs
+    /*GoRoute(
+      path: 'idukaan',
       builder: (context, state) {
-        // TODO : Create iDukaan Features Page and APIs
+        return const InitScreen();
+      }
+    ),*/
+    GoRoute(
+      path: '/idukaan/user',
+      builder: (context, state) {
         return const InitScreen();
       },
       routes: <RouteBase>[
         GoRoute(
-          path: 'user',
-          builder: (context, state) {
-            return const InitScreen();
-          },
+          path: 'login',
+          builder: (context, state) => const UserLoginScreen(),
+        ),
+        GoRoute(
+          path: 'signup',
+          builder: (context, state) => const UserSignupView(),
           routes: <RouteBase>[
             GoRoute(
-              path: 'login',
-              builder: (context, state) => const UserLoginScreen(),
+              path: '1',
+              builder: (context, state) => const UserSignup1Screen(),
             ),
             GoRoute(
-              path: 'signup',
-              builder: (context, state) => const UserSignupView(),
-              routes: <RouteBase>[
-                GoRoute(
-                  path: '1',
-                  builder: (context, state) => const UserSignup1Screen(),
-                ),
-                GoRoute(
-                  path: '2',
-                  builder: (context, state) => const UserSignup2Screen(),
-                ),
-                GoRoute(
-                  path: '3',
-                  builder: (context, state) => const UserSignup3Screen(),
-                ),
-              ],
+              path: '2',
+              builder: (context, state) => const UserSignup2Screen(),
+            ),
+            GoRoute(
+              path: '3',
+              builder: (context, state) => const UserSignup3Screen(),
             ),
           ],
         ),
