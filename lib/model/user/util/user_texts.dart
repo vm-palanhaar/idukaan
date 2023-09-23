@@ -20,7 +20,7 @@ class UserSignupText {
       'To create your account, please enter your credentials in the fields below:';
 }
 
-class UserLogText {
+class UserLoginText {
   //App Bar Text
   static const String appBarTitle = 'Login';
 
@@ -28,5 +28,4 @@ class UserLogText {
   static const String title = 'User Credentials';
   static const String desc =
       'To access business diary, please enter your credentials in the fields below:';
-  static const String successMsg1 = 'Loading your business diary...';
 }
