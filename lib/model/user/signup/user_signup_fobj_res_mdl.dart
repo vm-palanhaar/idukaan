@@ -1,10 +1,10 @@
 class UserSignupFObjResMdl {
-  final List<String> firstName;
-  final List<String> lastName;
-  final List<String> contactNo;
-  final List<String> email;
-  final List<String> username;
-  final List<String> password;
+  final String firstName;
+  final String lastName;
+  final String contactNo;
+  final String email;
+  final String username;
+  final String password;
 
   UserSignupFObjResMdl({
     required this.firstName,
@@ -18,23 +18,23 @@ class UserSignupFObjResMdl {
   factory UserSignupFObjResMdl.fromJson(Map<String, dynamic> json) {
     return UserSignupFObjResMdl(
       firstName: json.containsKey("first_name")
-          ? List<String>.from(json['first_name'] as List)
-          : [],
+          ? List<String>.from(json['first_name'] as List).join('\n')
+          : '',
       lastName: json.containsKey("last_name")
-          ? List<String>.from(json['last_name'] as List)
-          : [],
+          ? List<String>.from(json['last_name'] as List).join('\n')
+          : '',
       contactNo: json.containsKey("contact_no")
-          ? List<String>.from(json['contact_no'] as List)
-          : [],
+          ? List<String>.from(json['contact_no'] as List).join('\n')
+          : '',
       email: json.containsKey("email")
-          ? List<String>.from(json['email'] as List)
-          : [],
+          ? List<String>.from(json['email'] as List).join('\n')
+          : '',
       username: json.containsKey("username")
-          ? List<String>.from(json['username'] as List)
-          : [],
+          ? List<String>.from(json['username'] as List).join('\n')
+          : '',
       password: json.containsKey("password")
-        ? List<String>.from(json['password'] as List)
-        : [],
+          ? List<String>.from(json['password'] as List).join('\n')
+          : '',
     );
   }
 }

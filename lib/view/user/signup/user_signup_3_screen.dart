@@ -7,6 +7,7 @@ import 'package:idukaan/view/util/app_bar.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/buttons/elevated_button_widget.dart';
 import 'package:idukaan/view/widgets/fields/text_form_field_widget.dart';
+import 'package:idukaan/view/widgets/list_tile_error_widget.dart';
 import 'package:provider/provider.dart';
 
 class UserSignup3Screen extends StatefulWidget {
@@ -27,7 +28,21 @@ class _UserSignup3ScreenState extends State<UserSignup3Screen> {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text('Hi $firstName'),
+        title: Text('Hi $firstName,'),
+        content: Text(message),
+        actions: const [],
+      ),
+    );
+  }
+
+  void _failedResponse({
+    required String firstName,
+    required String message,
+  }) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text('Hi $firstName,'),
         content: Text(message),
         actions: const [],
       ),
@@ -51,6 +66,54 @@ class _UserSignup3ScreenState extends State<UserSignup3Screen> {
                 margin: screenMargin(context),
                 child: Column(
                   children: [
+                    if (ctrl.userSignUpRes != null &&
+                        ctrl.userSignUpRes!.userFObj != null)
+                      Card(
+                        child: Column(
+                          children: [
+                            if (ctrl
+                                .userSignUpRes!.userFObj!.firstName.isNotEmpty)
+                              ListTileErrorWidget(
+                                title: 'First Name',
+                                subtitle:
+                                ctrl.userSignUpRes!.userFObj!.firstName,
+                              ),
+                            if (ctrl
+                                .userSignUpRes!.userFObj!.lastName.isNotEmpty)
+                              ListTileErrorWidget(
+                                title: 'Last Name',
+                                subtitle:
+                                ctrl.userSignUpRes!.userFObj!.lastName,
+                              ),
+                            if (ctrl
+                                .userSignUpRes!.userFObj!.contactNo.isNotEmpty)
+                              ListTileErrorWidget(
+                                title: 'Contact Number',
+                                subtitle:
+                                ctrl.userSignUpRes!.userFObj!.contactNo,
+                              ),
+                            if (ctrl
+                                .userSignUpRes!.userFObj!.username.isNotEmpty)
+                              ListTileErrorWidget(
+                                title: 'Username',
+                                subtitle:
+                                    ctrl.userSignUpRes!.userFObj!.username,
+                              ),
+                            if (ctrl.userSignUpRes!.userFObj!.email.isNotEmpty)
+                              ListTileErrorWidget(
+                                title: 'Email',
+                                subtitle: ctrl.userSignUpRes!.userFObj!.email,
+                              ),
+                            if (ctrl
+                                .userSignUpRes!.userFObj!.password.isNotEmpty)
+                              ListTileErrorWidget(
+                                title: 'Password',
+                                subtitle:
+                                    ctrl.userSignUpRes!.userFObj!.password,
+                              ),
+                          ],
+                        ),
+                      ),
                     const ListTile(
                       title: Text(UserSignupText.title3),
                       subtitle: Text(UserSignupText.desc3),
@@ -83,7 +146,14 @@ class _UserSignup3ScreenState extends State<UserSignup3Screen> {
                                     ctrl.userSignUpRes!.userSObj!.firstName,
                                 message: ctrl.userSignUpRes!.message,
                               );
-                            } else {}
+                              // Set user signup response obj NULL
+                              ctrl.userSignUpRes = null;
+                            } else if (ctrl.userSignUpRes!.userFObj != null) {
+                              _failedResponse(
+                                firstName: ctrl.userSignUpReq.getFirstName,
+                                message: ctrl.userSignUpRes!.message,
+                              );
+                            }
                           }
                         }
                       },

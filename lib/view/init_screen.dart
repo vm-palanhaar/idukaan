@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:idukaan/controller/user/user_ctrl.dart';
 import 'package:idukaan/model/init/init_data.dart';
 import 'package:idukaan/view/util/margins.dart';
-import 'package:idukaan/view/util/texts.dart';
+import 'package:idukaan/view/widgets/text_widget.dart';
 import 'package:provider/provider.dart';
 
 class InitScreen extends StatefulWidget {
@@ -47,9 +47,10 @@ class _InitScreenState extends State<InitScreen> {
                   ],
                 ),
                 const Spacer(),
-                boldSizeText(
+                TextWidget(
                   text: 'Welcome to\niDukaan by Palanhaar',
-                  size: MediaQuery.of(context).size.height * 0.03,
+                  fontWeight: FontWeight.bold,
+                  fontSize: MediaQuery.of(context).size.height * 0.03,
                 ),
                 const Spacer(),
                 const Divider(),
@@ -73,9 +74,10 @@ class _InitScreenState extends State<InitScreen> {
                 ),
                 const Divider(),
                 const Spacer(),
-                boldSizeText(
+                TextWidget(
                   text: '',
-                  size: MediaQuery.of(context).size.height * 0.03,
+                  fontWeight: FontWeight.bold,
+                  fontSize: MediaQuery.of(context).size.height * 0.03,
                 ),
                 const Spacer(),
               ],

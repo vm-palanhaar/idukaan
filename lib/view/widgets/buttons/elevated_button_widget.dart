@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:idukaan/view/util/margins.dart';
-import 'package:idukaan/view/util/texts.dart';
+import 'package:idukaan/view/widgets/text_widget.dart';
 
 class ElevatedButtonWidget extends StatelessWidget {
   final String title;
@@ -28,9 +28,10 @@ class ElevatedButtonWidget extends StatelessWidget {
             MediaQuery.of(context).size.height * 0.06,
           ),
         ),
-        child: boldSizeText(
+        child: TextWidget(
           text: title,
-          size: MediaQuery.of(context).size.height * 0.027,
+          fontWeight: FontWeight.bold,
+          fontSize: MediaQuery.of(context).size.height * 0.027,
         ),
       ),
     );
