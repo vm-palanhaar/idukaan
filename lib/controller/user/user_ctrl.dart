@@ -16,7 +16,14 @@ class UserCtrl extends UserCtrlMdl {
     notifyListeners();
   }
 
-  Future<void> userLoginApi({
+  Future<void> postUserLoginApi({
     required BuildContext context,
-  }) async {}
+  }) async {
+    userLoginRes = await _userApi.postUserLoginApi(
+      context: context,
+      userLoginReq: userLoginReq,
+      showError: true,
+    );
+    notifyListeners();
+  }
 }

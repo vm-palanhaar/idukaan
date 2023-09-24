@@ -51,7 +51,7 @@ class _UserSignup3ScreenState extends State<UserSignup3Screen> {
 
   @override
   Widget build(BuildContext context) {
-    final userSignup2Key = GlobalKey<FormState>();
+    final userSignup3Key = GlobalKey<FormState>();
     return Consumer<UserCtrl>(
       builder: (context, ctrl, _) {
         return Scaffold(
@@ -61,7 +61,7 @@ class _UserSignup3ScreenState extends State<UserSignup3Screen> {
           ),
           body: SingleChildScrollView(
             child: Form(
-              key: userSignup2Key,
+              key: userSignup3Key,
               child: Container(
                 margin: screenMargin(context),
                 child: Column(
@@ -135,7 +135,7 @@ class _UserSignup3ScreenState extends State<UserSignup3Screen> {
                     ElevatedButtonWidget(
                       title: 'Next',
                       onPressed: () async {
-                        if (userSignup2Key.currentState!.validate()) {
+                        if (userSignup3Key.currentState!.validate()) {
                           await ctrl.postUserSignupApi(
                             context: context,
                           );
@@ -146,7 +146,7 @@ class _UserSignup3ScreenState extends State<UserSignup3Screen> {
                                     ctrl.userSignUpRes!.userSObj!.firstName,
                                 message: ctrl.userSignUpRes!.message,
                               );
-                              // Set user signup response obj NULL
+                              // set user signup response obj NULL
                               ctrl.userSignUpRes = null;
                             } else if (ctrl.userSignUpRes!.userFObj != null) {
                               _failedResponse(

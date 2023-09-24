@@ -4,6 +4,7 @@ const String baseUrlApi = 'http://192.168.29.176:8080/api';
 enum UserApiUri {
   //PROD
   signup(uri: '$baseUrlApi/user/v1/signup'),
+  login(uri: '$baseUrlApi/user/v1/login'),
   //DEV
   doNotUse(uri: '');
 
