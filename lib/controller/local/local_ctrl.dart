@@ -37,6 +37,7 @@ class LocalCtrl extends LocalCtrlMdl {
     );
     readAllKeys();
   }
+
   /*
   1 - User verified
   0 - User not verified

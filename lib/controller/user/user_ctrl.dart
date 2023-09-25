@@ -37,6 +37,7 @@ class UserCtrl extends UserCtrlMdl {
     if (userLoginRes != null) {
       if (userLoginRes!.userSObj != null) {
         LocalCtrl ctrl = Provider.of<LocalCtrl>(context!, listen: false);
+        ctrl.deleteAllKeys();
         ctrl.writeKey(
           key: AppKey.firstName.key,
           value: userLoginRes!.userSObj!.firstName,

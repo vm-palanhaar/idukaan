@@ -110,7 +110,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                       prefixIcon: UserIcon.pwd.icon,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
-                      labelText: 'Username',
+                      labelText: 'Password',
                       onFieldSubmitted: ctrl.userLoginReq.setPwd,
                     ),
                     ElevatedButtonWidget(
