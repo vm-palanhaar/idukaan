@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:idukaan/controller/local/local_ctrl.dart';
 import 'package:idukaan/controller/user/user_ctrl.dart';
 import 'package:idukaan/model/init/init_data.dart';
 import 'package:idukaan/view/util/margins.dart';
@@ -20,7 +21,25 @@ class _InitScreenState extends State<InitScreen> {
     super.initState();
   }
 
-  Future<void> isUserLoggedIn() async {}
+  Future<void> goToMainScreen() async {
+    //context.replace('');
+  }
+
+  Future<void> goToUserVerScreen() async {
+    //context.replace('');
+  }
+
+  Future<void> isUserLoggedIn() async {
+    LocalCtrl ctrl = Provider.of<LocalCtrl>(context, listen: false);
+    switch (await ctrl.isUserLoggedIn()) {
+      case 1:
+        goToMainScreen();
+        break;
+      case 0:
+        goToUserVerScreen();
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

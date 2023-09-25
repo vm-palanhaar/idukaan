@@ -44,6 +44,12 @@ final GoRouter routerConfig = GoRouter(
             ),
           ],
         ),
+        // GoRoute(
+        //   path: 'init-kyc',
+        //   builder: (context, state) {
+        //     return Container();
+        //   }
+        // ),
       ],
     ),
   ],

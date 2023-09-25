@@ -6,6 +6,8 @@ import 'package:idukaan/model/user/signup/user_signup_req_mdl.dart';
 import 'package:idukaan/model/user/signup/user_signup_res_mdl.dart';
 
 class UserCtrlMdl extends ChangeNotifier {
+  BuildContext? context;
+
   UserSignupReqMdl userSignUpReq = UserSignupReqMdl();
   UserSignupResMdl? userSignUpRes;
 
