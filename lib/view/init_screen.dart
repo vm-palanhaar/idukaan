@@ -26,7 +26,7 @@ class _InitScreenState extends State<InitScreen> {
   }
 
   Future<void> goToUserVerScreen() async {
-    //context.replace('');
+    context.replace('/idukaan/user/init-kyc');
   }
 
   Future<void> isUserLoggedIn() async {

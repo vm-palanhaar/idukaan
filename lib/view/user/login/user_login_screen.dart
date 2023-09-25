@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:idukaan/controller/user/user_ctrl.dart';
 import 'package:idukaan/model/user/util/user_icon.dart';
 import 'package:idukaan/model/user/util/user_texts.dart';
@@ -31,6 +32,8 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
     required String firstName,
     required String message,
   }) {
+    context.pop('/idukaan/user');
+    context.replace('/idukaan/user/init-kyc');
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
@@ -133,7 +136,6 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                                       ctrl.userLoginRes!.userSObj!.firstName,
                                   message: ctrl.userLoginRes!.message,
                                 );
-                                //TODO: re-direct to user identity verification page
                               }
                             } else if (ctrl.userLoginRes!.userFObj != null) {
                               _failedResponse(

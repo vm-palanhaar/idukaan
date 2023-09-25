@@ -37,28 +37,44 @@ class UserCtrl extends UserCtrlMdl {
     if (userLoginRes != null) {
       if (userLoginRes!.userSObj != null) {
         LocalCtrl ctrl = Provider.of<LocalCtrl>(context!, listen: false);
-        ctrl.deleteAllKeys();
-        ctrl.writeKey(
+        await ctrl.deleteAllKeys();
+        await ctrl.writeKey(
           key: AppKey.firstName.key,
           value: userLoginRes!.userSObj!.firstName,
         );
-        ctrl.writeKey(
+        await ctrl.writeKey(
           key: AppKey.lastName.key,
           value: userLoginRes!.userSObj!.lastName,
         );
-        ctrl.writeKey(
+        await ctrl.writeKey(
           key: AppKey.username.key,
           value: userLoginRes!.userSObj!.username,
         );
-        ctrl.writeKey(
+        await ctrl.writeKey(
           key: AppKey.isVerified.key,
           value: userLoginRes!.userSObj!.isVer.toString(),
         );
-        ctrl.writeKey(
+        await ctrl.writeKey(
           key: AppKey.token.key,
           value: userLoginRes!.token,
         );
       }
     }
+  }
+
+  Future<void> postUserLogoutApi({
+    required BuildContext context,
+  }) async {
+    LocalCtrl ctrl = Provider.of<LocalCtrl>(context, listen: false);
+    String token = ctrl.appKeys[AppKey.token.key]!;
+    userLogoutRes = await _userApi.postUserLogoutApi(
+      context: context,
+      token: token,
+      showError: true,
+    );
+    if (userLogoutRes) {
+      await ctrl.deleteAllKeys();
+    }
+    notifyListeners();
   }
 }

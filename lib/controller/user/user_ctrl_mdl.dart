@@ -13,4 +13,6 @@ class UserCtrlMdl extends ChangeNotifier {
 
   UserLoginReqMdl userLoginReq = UserLoginReqMdl();
   UserLoginResMdl? userLoginRes;
+
+  bool userLogoutRes = false;
 }

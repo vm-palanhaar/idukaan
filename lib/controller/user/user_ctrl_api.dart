@@ -57,8 +57,26 @@ class UserCtrlApi {
         userRes = UserLoginResMdl.success(resDecode);
         break;
       default:
-      userRes = UserLoginResMdl.failed(resDecode);
+        userRes = UserLoginResMdl.failed(resDecode);
     }
     return userRes;
+  }
+
+  Future<bool> postUserLogoutApi({
+    required BuildContext context,
+    required String token,
+    required bool showError,
+  }) async {
+    var response = await http.post(
+      Uri.parse(UserApiUri.logout.uri),
+      headers: {
+        'Authorization': 'Token $token',
+      },
+    );
+    switch (response.statusCode){
+      case 204:
+        return true;
+    }
+    return false;
   }
 }

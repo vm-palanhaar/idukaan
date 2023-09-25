@@ -1,27 +1,31 @@
-import 'dart:developer';
-
 import 'package:idukaan/controller/local/local_ctrl_mdl.dart';
 
 class LocalCtrl extends LocalCtrlMdl {
   // read all values
   Future<void> readAllKeys() async {
+    for (String key in getAppKeys) {
+      final x = await storage.read(
+        key: key,
+        aOptions: getAndroidOptions(),
+      );
+      if (x != null) {
+        appKeys[key] = x;
+      }
+    }
+    if (appKeys.length != getAppKeys.length) {}
     appKeys = await storage.readAll(
       aOptions: getAndroidOptions(),
     );
-    if (appKeys.isNotEmpty) {
-      // delete all keys if required no of keys are not found
-      if (appKeys.keys.length != getAppKeys.length) {
-        deleteAllKeys();
-      }
-    }
-    log(appKeys.toString());
   }
 
   // delete all keys
   Future<void> deleteAllKeys() async {
-    await storage.deleteAll(
-      aOptions: getAndroidOptions(),
-    );
+    for (String key in getAppKeys) {
+      await storage.delete(
+        key: key,
+        aOptions: getAndroidOptions(),
+      );
+    }
     readAllKeys();
   }
 

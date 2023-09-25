@@ -5,6 +5,8 @@ enum UserApiUri {
   //PROD
   signup(uri: '$baseUrlApi/user/v1/signup'),
   login(uri: '$baseUrlApi/user/v1/login'),
+  logout(uri: '$baseUrlApi/user/v1/logout'),
+  logoutAll(uri: '$baseUrlApi/user/v1/logoutAll'),
   //DEV
   doNotUse(uri: '');
 
