@@ -12,10 +12,9 @@ class LocalCtrl extends LocalCtrlMdl {
         appKeys[key] = x;
       }
     }
-    if (appKeys.length != getAppKeys.length) {}
-    appKeys = await storage.readAll(
-      aOptions: getAndroidOptions(),
-    );
+    if (appKeys.length != getAppKeys.length) {
+      await deleteAllKeys();
+    }
   }
 
   // delete all keys

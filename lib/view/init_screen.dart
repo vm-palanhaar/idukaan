@@ -22,11 +22,17 @@ class _InitScreenState extends State<InitScreen> {
   }
 
   Future<void> goToMainScreen() async {
-    //context.replace('');
+    context.replace('/idukaan/dashboard');
   }
 
-  Future<void> goToUserVerScreen() async {
-    context.replace('/idukaan/user/init-kyc');
+  Future<void> getUserLoggedInValid() async {
+    UserCtrl ctrl = Provider.of<UserCtrl>(context, listen: false);
+    await ctrl.getUserLoggedInValidApi(
+      context: context,
+    );
+    if (ctrl.userLoggedInValidRes != null) {
+      goToMainScreen();
+    }
   }
 
   Future<void> isUserLoggedIn() async {
@@ -36,7 +42,7 @@ class _InitScreenState extends State<InitScreen> {
         goToMainScreen();
         break;
       case 0:
-        goToUserVerScreen();
+        getUserLoggedInValid();
         break;
     }
   }

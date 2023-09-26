@@ -146,6 +146,15 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                         }
                       },
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text('Having trouble logging in?'),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
