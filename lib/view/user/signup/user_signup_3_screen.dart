@@ -120,13 +120,13 @@ class _UserSignup3ScreenState extends State<UserSignup3Screen> {
                     ),
                     const Divider(),
                     TextFormFieldWidget(
-                      prefixIcon: UserIcon.username.icon,
+                      prefixIcon: UserIcons.username.icon,
                       keyboardType: TextInputType.name,
                       labelText: 'Username',
                       onFieldSubmitted: ctrl.userSignUpReq.setUsername,
                     ),
                     TextFormFieldWidget(
-                      prefixIcon: UserIcon.pwd.icon,
+                      prefixIcon: UserIcons.pwd.icon,
                       obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
                       labelText: 'Password',

@@ -26,6 +26,8 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
         content: Text(message),
       ),
     );
+    context.pop('/idukaan/user');
+    context.replace('/idukaan/dashboard');
   }
 
   void _successResponseUserNotVerified({
@@ -104,13 +106,13 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                     ),
                     const Divider(),
                     TextFormFieldWidget(
-                      prefixIcon: UserIcon.username.icon,
+                      prefixIcon: UserIcons.username.icon,
                       keyboardType: TextInputType.name,
                       labelText: 'Username',
                       onFieldSubmitted: ctrl.userLoginReq.setUsername,
                     ),
                     TextFormFieldWidget(
-                      prefixIcon: UserIcon.pwd.icon,
+                      prefixIcon: UserIcons.pwd.icon,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                       labelText: 'Password',
