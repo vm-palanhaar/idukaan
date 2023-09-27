@@ -22,21 +22,36 @@ class _InitScreenState extends State<InitScreen> {
   }
 
   Future<void> goToMainScreen() async {
-    //context.replace('');
+    context.replace('/idukaan/dashboard');
   }
 
-  Future<void> goToUserVerScreen() async {
+  Future<void> goToKycScreen() async {
     context.replace('/idukaan/user/init-kyc');
+  }
+
+  Future<void> getUserLoggedInValid() async {
+    UserCtrl ctrl = Provider.of<UserCtrl>(context, listen: false);
+    await ctrl.getUserLoggedInValidApi(
+      context: context,
+    );
+    if (ctrl.userLoggedInValidRes != null) {
+      if (ctrl.userLoggedInValidRes!.isVer){
+        goToMainScreen();
+      }
+      else {
+        goToKycScreen();
+      }
+    }
   }
 
   Future<void> isUserLoggedIn() async {
     LocalCtrl ctrl = Provider.of<LocalCtrl>(context, listen: false);
     switch (await ctrl.isUserLoggedIn()) {
       case 1:
-        goToMainScreen();
+        await getUserLoggedInValid();
         break;
       case 0:
-        goToUserVerScreen();
+        await getUserLoggedInValid();
         break;
     }
   }

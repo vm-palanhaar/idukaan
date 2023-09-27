@@ -35,13 +35,13 @@ class UserSignup1Screen extends StatelessWidget {
                     ),
                     const Divider(),
                     TextFormFieldWidget(
-                      prefixIcon: UserIcon.name.icon,
+                      prefixIcon: UserIcons.name.icon,
                       keyboardType: TextInputType.name,
                       labelText: 'First Name',
                       onFieldSubmitted: ctrl.userSignUpReq.setFirstName,
                     ),
                     TextFormFieldWidget(
-                      prefixIcon: UserIcon.name.icon,
+                      prefixIcon: UserIcons.name.icon,
                       keyboardType: TextInputType.name,
                       labelText: 'Last Name',
                       onFieldSubmitted: ctrl.userSignUpReq.setLastName,

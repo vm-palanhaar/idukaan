@@ -29,11 +29,11 @@ class UserCtrl extends UserCtrlMdl {
       userLoginReq: userLoginReq,
       showError: true,
     );
-    await saveUserInfo();
+    await _saveUserLoginInfo();
     notifyListeners();
   }
 
-  Future<void> saveUserInfo() async {
+  Future<void> _saveUserLoginInfo() async {
     if (userLoginRes != null) {
       if (userLoginRes!.userSObj != null) {
         LocalCtrl ctrl = Provider.of<LocalCtrl>(context!, listen: false);
@@ -59,6 +59,49 @@ class UserCtrl extends UserCtrlMdl {
           value: userLoginRes!.token,
         );
       }
+    }
+  }
+
+  Future<void> getUserLoggedInValidApi({
+    required BuildContext context,
+  }) async {
+    super.context = context;
+    LocalCtrl ctrl = Provider.of<LocalCtrl>(context, listen: false);
+    String token = ctrl.appKeys[AppKey.token.key]!;
+    userLoggedInValidRes = await _userApi.getUserLoggedInValidApi(
+      context: context,
+      token: token,
+      showError: true,
+    );
+    if (userLoggedInValidRes != null) {
+      await _saveUserLoggedInValidInfo();
+    } else {
+      await ctrl.deleteAllKeys();
+    }
+    notifyListeners();
+  }
+
+  Future<void> _saveUserLoggedInValidInfo() async {
+    LocalCtrl ctrl = Provider.of<LocalCtrl>(context!, listen: false);
+    if (userLoggedInValidRes != null) {
+      await ctrl.writeKey(
+        key: AppKey.firstName.key,
+        value: userLoggedInValidRes!.firstName,
+      );
+      await ctrl.writeKey(
+        key: AppKey.lastName.key,
+        value: userLoggedInValidRes!.lastName,
+      );
+      await ctrl.writeKey(
+        key: AppKey.username.key,
+        value: userLoggedInValidRes!.username,
+      );
+      await ctrl.writeKey(
+        key: AppKey.isVerified.key,
+        value: userLoggedInValidRes!.isVer.toString(),
+      );
+    } else {
+      await ctrl.deleteAllKeys();
     }
   }
 

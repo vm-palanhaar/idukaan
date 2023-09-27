@@ -1,5 +1,9 @@
 import 'package:go_router/go_router.dart';
 import 'package:idukaan/view/init_screen.dart';
+import 'package:idukaan/view/main/business/business_screen.dart';
+import 'package:idukaan/view/main/dashboard/dashboard_screen.dart';
+import 'package:idukaan/view/main/profile/profile_screen.dart';
+import 'package:idukaan/view/main/shop/shop_screen.dart';
 import 'package:idukaan/view/user/kyc/user_init_kyc_screen.dart';
 import 'package:idukaan/view/user/login/user_login_screen.dart';
 import 'package:idukaan/view/user/signup/user_signup_1_screen.dart';
@@ -10,13 +14,6 @@ import 'package:idukaan/view/user/signup/user_signup_view.dart';
 final GoRouter routerConfig = GoRouter(
   initialLocation: '/idukaan/user',
   routes: <RouteBase>[
-    // TODO : Create iDukaan Features Page and APIs
-    /*GoRoute(
-      path: 'idukaan',
-      builder: (context, state) {
-        return const InitScreen();
-      }
-    ),*/
     GoRoute(
       path: '/idukaan/user',
       builder: (context, state) {
@@ -49,9 +46,33 @@ final GoRouter routerConfig = GoRouter(
           path: 'init-kyc',
           builder: (context, state) {
             return const UserInitKycScreen();
-          }
+          },
         ),
       ],
+    ),
+    GoRoute(
+      path: '/idukaan/dashboard',
+      builder: (context, state) {
+        return const DashboardScreen();
+      },
+    ),
+    GoRoute(
+      path: '/idukaan/business',
+      builder: (context, state) {
+        return const BusinessScreen();
+      },
+    ),
+    GoRoute(
+      path: '/idukaan/shop',
+      builder: (context, state) {
+        return const ShopScreen();
+      },
+    ),
+    GoRoute(
+      path: '/idukaan/profile',
+      builder: (context, state) {
+        return const ProfileScreen();
+      },
     ),
   ],
 );
