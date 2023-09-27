@@ -51,14 +51,14 @@ class UserSignup2Screen extends StatelessWidget {
                     ),
                     const Divider(),
                     TextFormFieldWidget(
-                      prefixIcon: UserIcon.contactNo.icon,
+                      prefixIcon: UserIcons.contactNo.icon,
                       keyboardType: TextInputType.number,
                       labelText: 'Contact Number',
                       validator: validatorContactNo,
                       onFieldSubmitted: ctrl.userSignUpReq.setContactNo,
                     ),
                     TextFormFieldWidget(
-                      prefixIcon: UserIcon.mail.icon,
+                      prefixIcon: UserIcons.mail.icon,
                       keyboardType: TextInputType.emailAddress,
                       labelText: 'Email',
                       validator: validatorEmail,

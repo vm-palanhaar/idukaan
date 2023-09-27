@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:idukaan/controller/user/user_ctrl.dart';
 import 'package:idukaan/model/user/util/user_icon.dart';
 import 'package:idukaan/model/user/util/user_texts.dart';
@@ -25,12 +26,16 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
         content: Text(message),
       ),
     );
+    context.pop('/idukaan/user');
+    context.replace('/idukaan/dashboard');
   }
 
   void _successResponseUserNotVerified({
     required String firstName,
     required String message,
   }) {
+    context.pop('/idukaan/user');
+    context.replace('/idukaan/user/init-kyc');
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
@@ -101,16 +106,16 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                     ),
                     const Divider(),
                     TextFormFieldWidget(
-                      prefixIcon: UserIcon.username.icon,
+                      prefixIcon: UserIcons.username.icon,
                       keyboardType: TextInputType.name,
                       labelText: 'Username',
                       onFieldSubmitted: ctrl.userLoginReq.setUsername,
                     ),
                     TextFormFieldWidget(
-                      prefixIcon: UserIcon.pwd.icon,
+                      prefixIcon: UserIcons.pwd.icon,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
-                      labelText: 'Username',
+                      labelText: 'Password',
                       onFieldSubmitted: ctrl.userLoginReq.setPwd,
                     ),
                     ElevatedButtonWidget(
@@ -133,7 +138,6 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                                       ctrl.userLoginRes!.userSObj!.firstName,
                                   message: ctrl.userLoginRes!.message,
                                 );
-                                //TODO: re-direct to user identity verification page
                               }
                             } else if (ctrl.userLoginRes!.userFObj != null) {
                               _failedResponse(
@@ -143,6 +147,15 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                           }
                         }
                       },
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text('Having trouble logging in?'),
+                        ),
+                      ],
                     ),
                   ],
                 ),

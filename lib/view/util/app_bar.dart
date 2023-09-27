@@ -13,7 +13,6 @@ AppBar appBar({
         fontWeight: FontWeight.bold,
       ),
     ),
-    centerTitle: true,
     actions: actions,
   );
 }

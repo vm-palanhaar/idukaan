@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:idukaan/controller/local/local_ctrl.dart';
 import 'package:idukaan/controller/user/user_ctrl.dart';
 import 'package:idukaan/model/init/init_data.dart';
 import 'package:idukaan/view/util/margins.dart';
@@ -20,7 +21,40 @@ class _InitScreenState extends State<InitScreen> {
     super.initState();
   }
 
-  Future<void> isUserLoggedIn() async {}
+  Future<void> goToMainScreen() async {
+    context.replace('/idukaan/dashboard');
+  }
+
+  Future<void> goToKycScreen() async {
+    context.replace('/idukaan/user/init-kyc');
+  }
+
+  Future<void> getUserLoggedInValid() async {
+    UserCtrl ctrl = Provider.of<UserCtrl>(context, listen: false);
+    await ctrl.getUserLoggedInValidApi(
+      context: context,
+    );
+    if (ctrl.userLoggedInValidRes != null) {
+      if (ctrl.userLoggedInValidRes!.isVer){
+        goToMainScreen();
+      }
+      else {
+        goToKycScreen();
+      }
+    }
+  }
+
+  Future<void> isUserLoggedIn() async {
+    LocalCtrl ctrl = Provider.of<LocalCtrl>(context, listen: false);
+    switch (await ctrl.isUserLoggedIn()) {
+      case 1:
+        await getUserLoggedInValid();
+        break;
+      case 0:
+        await getUserLoggedInValid();
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

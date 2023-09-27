@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-enum UserIcon {
+enum UserIcons {
   name(icon: Icons.person),
-  contactNo(icon: Icons.person),
+  contactNo(icon: Icons.contact_phone_outlined),
   mail(icon: Icons.mail),
   username(icon: Icons.verified_user),
   pwd(icon: Icons.password);
 
-  const UserIcon({
+  const UserIcons({
     required this.icon,
   });
 
