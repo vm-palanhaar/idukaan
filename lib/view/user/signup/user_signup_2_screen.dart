@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:idukaan/controller/user/user_ctrl.dart';
 import 'package:idukaan/model/user/util/user_icon.dart';
 import 'package:idukaan/model/user/util/user_texts.dart';
+import 'package:idukaan/view/user/signup/user_signup_3_screen.dart';
 import 'package:idukaan/view/util/app_bar.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/buttons/elevated_button_widget.dart';
@@ -11,6 +12,7 @@ import 'package:provider/provider.dart';
 
 class UserSignup2Screen extends StatelessWidget {
   const UserSignup2Screen({super.key});
+  static String id = '/idukaan/user/signup/2';
 
   String? validatorContactNo(String? value) {
     if (value!.isEmpty) {
@@ -68,7 +70,7 @@ class UserSignup2Screen extends StatelessWidget {
                       title: 'Next',
                       onPressed: () {
                         if (userSignup2Key.currentState!.validate()) {
-                          context.push('/idukaan/user/signup/3');
+                          Navigator.pushNamed(context, UserSignup3Screen.id);
                         }
                       },
                     ),

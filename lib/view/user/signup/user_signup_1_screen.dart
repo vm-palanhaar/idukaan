@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:idukaan/controller/user/user_ctrl.dart';
 import 'package:idukaan/model/user/util/user_icon.dart';
 import 'package:idukaan/model/user/util/user_texts.dart';
+import 'package:idukaan/view/user/signup/user_signup_2_screen.dart';
 import 'package:idukaan/view/util/app_bar.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/buttons/elevated_button_widget.dart';
@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 class UserSignup1Screen extends StatelessWidget {
   const UserSignup1Screen({super.key});
+  static String id = '/idukaan/user/signup/1';
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,7 @@ class UserSignup1Screen extends StatelessWidget {
                       title: 'Next',
                       onPressed: () {
                         if (userSignup1Key.currentState!.validate()) {
-                          context.push('/idukaan/user/signup/2');
+                          Navigator.pushNamed(context, UserSignup2Screen.id);
                         }
                       },
                     ),

@@ -12,6 +12,8 @@ import 'package:provider/provider.dart';
 
 class UserSignup3Screen extends StatefulWidget {
   const UserSignup3Screen({super.key});
+  static String id = '/idukaan/user/signup/3';
+
 
   @override
   State<UserSignup3Screen> createState() => _UserSignup3ScreenState();

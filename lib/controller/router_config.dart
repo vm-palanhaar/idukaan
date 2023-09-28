@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:idukaan/view/init_screen.dart';
+import 'package:idukaan/view/init/init_screen.dart';
 import 'package:idukaan/view/main/business/business_screen.dart';
 import 'package:idukaan/view/main/dashboard/dashboard_screen.dart';
 import 'package:idukaan/view/main/profile/profile_screen.dart';
@@ -9,7 +9,7 @@ import 'package:idukaan/view/user/login/user_login_screen.dart';
 import 'package:idukaan/view/user/signup/user_signup_1_screen.dart';
 import 'package:idukaan/view/user/signup/user_signup_2_screen.dart';
 import 'package:idukaan/view/user/signup/user_signup_3_screen.dart';
-import 'package:idukaan/view/user/signup/user_signup_view.dart';
+import 'package:idukaan/view/user/signup/user_signup_accept_plc.dart';
 
 final GoRouter routerConfig = GoRouter(
   initialLocation: '/idukaan/user',
@@ -26,7 +26,7 @@ final GoRouter routerConfig = GoRouter(
         ),
         GoRoute(
           path: 'signup',
-          builder: (context, state) => const UserSignupView(),
+          builder: (context, state) => const UserSignupAcceptPlc(),
           routes: <RouteBase>[
             GoRoute(
               path: '1',

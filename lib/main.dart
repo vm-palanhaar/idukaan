@@ -1,33 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:idukaan/controller/local/local_ctrl.dart';
-import 'package:idukaan/controller/router_config.dart';
-import 'package:idukaan/controller/user/user_ctrl.dart';
+import 'package:idukaan/view/init/init_view.dart';
+import 'package:idukaan/view/init/init_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => LocalCtrl()),
-        ChangeNotifierProvider(create: (_) => UserCtrl()),
-      ],
+    ChangeNotifierProvider(
+      create: (_) => LocalCtrl(),
       child: const IDukaan(),
     ),
   );
 }
 
-class IDukaan extends StatelessWidget {
+class IDukaan extends StatefulWidget {
   const IDukaan({super.key});
 
   @override
+  State<IDukaan> createState() => _IDukaanState();
+}
+
+class _IDukaanState extends State<IDukaan> {
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return MaterialApp(
       title: 'iDukaan',
-      /*theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      theme: ThemeData(
         useMaterial3: true,
-      ),*/
-      routerConfig: routerConfig,
+      ),
+      initialRoute: InitView.id,
+      routes: {
+        InitView.id: (_) => const InitView(),
+      },
     );
   }
 }
