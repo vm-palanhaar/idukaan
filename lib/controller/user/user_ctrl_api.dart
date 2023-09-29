@@ -8,7 +8,6 @@ import 'package:idukaan/model/user/login/user_login_req_mdl.dart';
 import 'package:idukaan/model/user/login/user_login_res_mdl.dart';
 import 'package:idukaan/model/user/signup/user_signup_req_mdl.dart';
 import 'package:idukaan/model/user/signup/user_signup_res_mdl.dart';
-import 'package:idukaan/model/user/user_logged_in_valid_res_mdl.dart';
 
 class UserCtrlApi {
   Future<UserSignupResMdl?> postUserSignupApi({
@@ -54,34 +53,17 @@ class UserCtrlApi {
     );
     var resDecode = jsonDecode(response.body);
     switch (response.statusCode) {
-      case 201:
-        userRes = UserLoginResMdl.success(resDecode);
-        break;
-      default:
-        userRes = UserLoginResMdl.failed(resDecode);
-    }
-    return userRes;
-  }
-
-  Future<UserLoggedInValidResMdl?> getUserLoggedInValidApi({
-    required BuildContext context,
-    required String token,
-    required bool showError,
-  }) async {
-    UserLoggedInValidResMdl? userRes;
-    var response = await http.get(
-      Uri.parse(UserApiUri.validate.uri),
-      headers: {
-        'Authorization': 'Token $token',
-      },
-    );
-    var resDecode = jsonDecode(response.body);
-    switch (response.statusCode) {
       case 200:
-        userRes = UserLoggedInValidResMdl.fromJson(resDecode['user']);
+        return UserLoginResMdl.userNotVerified(resDecode);
+      case 201:
+        return UserLoginResMdl.userVerified(resDecode);
+      case 400:
+        return UserLoginResMdl.failed(resDecode);
+      case 403:
+        return UserLoginResMdl.failed(resDecode);
+      default:
         return userRes;
     }
-    return userRes;
   }
 
   Future<bool> postUserLogoutApi({

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:idukaan/view/main/util/bottom_nav_bar_util.dart';
 
 class BottomNavBarWidget extends StatelessWidget {
@@ -16,13 +15,13 @@ class BottomNavBarWidget extends StatelessWidget {
       currentIndex: currentIndex,
       onTap: (index) {
         switch (index) {
-          case 0: context.replace('/idukaan/dashboard');
+          case 0:
           break;
-          case 1: context.replace('/idukaan/business');
+          case 1:
           break;
-          case 2: context.replace('/idukaan/shop');
+          case 2:
           break;
-          case 3: context.replace('/idukaan/profile');
+          case 3:
           break;
         }
       },

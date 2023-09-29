@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:idukaan/controller/user/user_ctrl.dart';
 import 'package:idukaan/model/user/util/user_icon.dart';
 import 'package:idukaan/model/user/util/user_texts.dart';

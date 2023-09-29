@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:idukaan/controller/user/user_ctrl.dart';
 import 'package:idukaan/model/user/util/user_icon.dart';
 import 'package:idukaan/model/user/util/user_texts.dart';
+import 'package:idukaan/view/init/init_view.dart';
+import 'package:idukaan/view/main/dashboard/dashboard_screen.dart';
+import 'package:idukaan/view/user/kyc/user_init_kyc_screen.dart';
 import 'package:idukaan/view/util/app_bar.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/buttons/elevated_button_widget.dart';
@@ -22,21 +24,21 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
   void _successResponseUserVerified({
     required String message,
   }) {
+    Navigator.pushNamedAndRemoveUntil(
+        context, DashboardScreen.id, ModalRoute.withName(InitView.id));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
       ),
     );
-    context.pop('/idukaan/user');
-    context.replace('/idukaan/dashboard');
   }
 
   void _successResponseUserNotVerified({
     required String firstName,
     required String message,
   }) {
-    context.pop('/idukaan/user');
-    context.replace('/idukaan/user/init-kyc');
+    Navigator.pushNamedAndRemoveUntil(
+        context, UserInitKycScreen.id, ModalRoute.withName(InitView.id));
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
@@ -132,7 +134,6 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                                 _successResponseUserVerified(
                                   message: ctrl.userLoginRes!.message,
                                 );
-                                //TODO: re-direct to main home page
                               } else {
                                 _successResponseUserNotVerified(
                                   firstName:

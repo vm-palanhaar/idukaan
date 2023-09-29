@@ -16,10 +16,19 @@ class UserLoginResMdl {
     required this.userFObj,
   });
 
-  factory UserLoginResMdl.success(Map<String, dynamic> json) {
+  factory UserLoginResMdl.userVerified(Map<String, dynamic> json) {
     return UserLoginResMdl(
       userSObj: UserLoginSObjResMdl.fromJson(json['user']),
       token: json['token'] as String,
+      message: json['message'] as String,
+      userFObj: null,
+    );
+  }
+
+  factory UserLoginResMdl.userNotVerified(Map<String, dynamic> json) {
+    return UserLoginResMdl(
+      userSObj: UserLoginSObjResMdl.fromJson(json['user']),
+      token: '',
       message: json['message'] as String,
       userFObj: null,
     );

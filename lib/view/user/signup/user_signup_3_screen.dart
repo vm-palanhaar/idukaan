@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:idukaan/controller/user/user_ctrl.dart';
 import 'package:idukaan/model/user/util/user_icon.dart';
 import 'package:idukaan/model/user/util/user_texts.dart';
+import 'package:idukaan/view/init/init_screen.dart';
+import 'package:idukaan/view/init/init_view.dart';
 import 'package:idukaan/view/util/app_bar.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/buttons/elevated_button_widget.dart';
@@ -14,7 +15,6 @@ class UserSignup3Screen extends StatefulWidget {
   const UserSignup3Screen({super.key});
   static String id = '/idukaan/user/signup/3';
 
-
   @override
   State<UserSignup3Screen> createState() => _UserSignup3ScreenState();
 }
@@ -24,9 +24,8 @@ class _UserSignup3ScreenState extends State<UserSignup3Screen> {
     required String firstName,
     required String message,
   }) {
-    context.pop("/idukaan/user/1");
-    context.pop("/idukaan/user/2");
-    context.pop("/idukaan/user/3");
+    Navigator.pushNamedAndRemoveUntil(
+        context, InitScreen.id, ModalRoute.withName(InitView.id));
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
@@ -78,21 +77,21 @@ class _UserSignup3ScreenState extends State<UserSignup3Screen> {
                               ListTileErrorWidget(
                                 title: 'First Name',
                                 subtitle:
-                                ctrl.userSignUpRes!.userFObj!.firstName,
+                                    ctrl.userSignUpRes!.userFObj!.firstName,
                               ),
                             if (ctrl
                                 .userSignUpRes!.userFObj!.lastName.isNotEmpty)
                               ListTileErrorWidget(
                                 title: 'Last Name',
                                 subtitle:
-                                ctrl.userSignUpRes!.userFObj!.lastName,
+                                    ctrl.userSignUpRes!.userFObj!.lastName,
                               ),
                             if (ctrl
                                 .userSignUpRes!.userFObj!.contactNo.isNotEmpty)
                               ListTileErrorWidget(
                                 title: 'Contact Number',
                                 subtitle:
-                                ctrl.userSignUpRes!.userFObj!.contactNo,
+                                    ctrl.userSignUpRes!.userFObj!.contactNo,
                               ),
                             if (ctrl
                                 .userSignUpRes!.userFObj!.username.isNotEmpty)

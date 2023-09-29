@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:idukaan/controller/local/local_ctrl.dart';
-import 'package:idukaan/controller/local/local_ctrl_mdl.dart';
-import 'package:idukaan/controller/user/user_ctrl.dart';
 import 'package:idukaan/view/util/app_bar.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/text_widget.dart';
-import 'package:provider/provider.dart';
 
 class UserInitKycScreen extends StatelessWidget {
   const UserInitKycScreen({super.key});
+  static String id = '/idukaan/user/init-kyc';
 
   static String salutation = 'Dear <user>,\n';
   static const String message = 'Complete your KYC to access all the features '
@@ -41,10 +37,6 @@ class UserInitKycScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LocalCtrl localCtrl = Provider.of<LocalCtrl>(context, listen: false);
-    UserCtrl userCtrl = Provider.of<UserCtrl>(context, listen: false);
-    salutation = salutation.replaceAll(
-        "<user>", localCtrl.appKeys[AppKey.firstName.key]!);
     return Scaffold(
       appBar: appBar(
         context: context,
@@ -96,16 +88,6 @@ class UserInitKycScreen extends StatelessWidget {
                 child: ListTile(
                   leading: Icon(Icons.perm_identity),
                   title: Text('Continue KYC'),
-                ),
-              ),
-              Card(
-                child: ListTile(
-                  leading: const Icon(Icons.logout_outlined),
-                  title: const Text('Logout'),
-                  onTap: () async {
-                    context.replace('/idukaan/user');
-                    await userCtrl.postUserLogoutApi(context: context);
-                  },
                 ),
               ),
             ],

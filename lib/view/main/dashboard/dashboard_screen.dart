@@ -4,6 +4,7 @@ import 'package:idukaan/view/util/margins.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
+  static String id = '/idukaan/hello';
 
   @override
   Widget build(BuildContext context) {
