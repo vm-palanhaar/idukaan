@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:idukaan/controller/user/user_ctrl.dart';
 import 'package:idukaan/view/init/init_screen.dart';
 import 'package:idukaan/view/main/dashboard/dashboard_screen.dart';
-import 'package:idukaan/view/user/kyc/user_init_kyc_screen.dart';
 import 'package:idukaan/view/user/login/user_login_screen.dart';
 import 'package:idukaan/view/user/signup/user_signup_1_screen.dart';
 import 'package:idukaan/view/user/signup/user_signup_2_screen.dart';
@@ -36,8 +35,7 @@ class InitView extends StatelessWidget {
           UserSignup1Screen.id: (_) => const UserSignup1Screen(),
           UserSignup2Screen.id: (_) => const UserSignup2Screen(),
           UserSignup3Screen.id: (_) => const UserSignup3Screen(),
-          // user kyc
-          UserInitKycScreen.id :(_) => const UserInitKycScreen(),
+          // navigate to main screen
           DashboardScreen.id: (_) => const DashboardScreen(),
         },
       ),

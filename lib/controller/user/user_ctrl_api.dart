@@ -53,10 +53,8 @@ class UserCtrlApi {
     );
     var resDecode = jsonDecode(response.body);
     switch (response.statusCode) {
-      case 200:
-        return UserLoginResMdl.userNotVerified(resDecode);
       case 201:
-        return UserLoginResMdl.userVerified(resDecode);
+        return UserLoginResMdl.success(resDecode);
       case 400:
         return UserLoginResMdl.failed(resDecode);
       case 403:

@@ -4,7 +4,6 @@ import 'package:idukaan/model/user/util/user_icon.dart';
 import 'package:idukaan/model/user/util/user_texts.dart';
 import 'package:idukaan/view/init/init_view.dart';
 import 'package:idukaan/view/main/dashboard/dashboard_screen.dart';
-import 'package:idukaan/view/user/kyc/user_init_kyc_screen.dart';
 import 'package:idukaan/view/util/app_bar.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/buttons/elevated_button_widget.dart';
@@ -29,22 +28,6 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-      ),
-    );
-  }
-
-  void _successResponseUserNotVerified({
-    required String firstName,
-    required String message,
-  }) {
-    Navigator.pushNamedAndRemoveUntil(
-        context, UserInitKycScreen.id, ModalRoute.withName(InitView.id));
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text('Hi $firstName,'),
-        content: Text(message),
-        actions: const [],
       ),
     );
   }
@@ -129,19 +112,12 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                             context: context,
                           );
                           if (ctrl.userLoginRes != null) {
-                            if (ctrl.userLoginRes!.userSObj != null) {
-                              if (ctrl.userLoginRes!.userSObj!.isVer) {
-                                _successResponseUserVerified(
-                                  message: ctrl.userLoginRes!.message,
-                                );
-                              } else {
-                                _successResponseUserNotVerified(
-                                  firstName:
-                                      ctrl.userLoginRes!.userSObj!.firstName,
-                                  message: ctrl.userLoginRes!.message,
-                                );
-                              }
-                            } else if (ctrl.userLoginRes!.userFObj != null) {
+                            if (ctrl.userLoginRes!.userSObj != null &&
+                                ctrl.userLoginRes!.userSObj!.isVer) {
+                              _successResponseUserVerified(
+                                message: ctrl.userLoginRes!.message,
+                              );
+                            } else {
                               _failedResponse(
                                 message: ctrl.userLoginRes!.message,
                               );
