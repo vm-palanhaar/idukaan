@@ -3,7 +3,7 @@ import 'package:idukaan/controller/user/user_ctrl.dart';
 import 'package:idukaan/model/user/util/user_icon.dart';
 import 'package:idukaan/model/user/util/user_texts.dart';
 import 'package:idukaan/view/init/init_view.dart';
-import 'package:idukaan/view/main/dashboard/dashboard_screen.dart';
+import 'package:idukaan/view/main/home_screen_view.dart';
 import 'package:idukaan/view/util/app_bar.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/buttons/elevated_button_widget.dart';
@@ -24,7 +24,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
     required String message,
   }) {
     Navigator.pushNamedAndRemoveUntil(
-        context, DashboardScreen.id, ModalRoute.withName(InitView.id));
+        context, HomeScreenView.id, ModalRoute.withName(InitView.id));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),

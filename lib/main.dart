@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:idukaan/controller/auth/auth_ctrl.dart';
 import 'package:idukaan/view/init/init_view.dart';
 import 'package:idukaan/view/init/splash_sceen.dart';
-import 'package:idukaan/view/main/dashboard/dashboard_screen.dart';
+import 'package:idukaan/view/main/home_screen_view.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -25,7 +25,7 @@ class IDukaan extends StatelessWidget {
         routes: {
           SplashScreen.id: (_) => const SplashScreen(),
           InitView.id: (_) => const InitView(),
-          DashboardScreen.id: (_) => const DashboardScreen(),
+          HomeScreenView.id: (_) => const HomeScreenView(),
         },
       ),
     );

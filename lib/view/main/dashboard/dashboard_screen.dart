@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:idukaan/view/main/widgets/bottom_nav_bar_widget.dart';
 import 'package:idukaan/view/util/margins.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -16,9 +15,6 @@ class DashboardScreen extends StatelessWidget {
             children: [],
           ),
         ),
-      ),
-      bottomNavigationBar: const BottomNavBarWidget(
-        currentIndex: 0,
       ),
     );
   }
