@@ -53,6 +53,7 @@ class UserCtrl extends UserCtrlMdl {
           key: AppKey.token.key,
           value: userLoginRes!.token,
         );
+        await ctrl.readAllKeys();
       }
     }
   }

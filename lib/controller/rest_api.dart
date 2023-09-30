@@ -17,3 +17,28 @@ enum UserApiUri {
 
   final String uri;
 }
+
+//---BusinessApp---
+const String baseUrlApiBusAppV1 = '$baseUrlApi/idukaan/business/v1';
+
+enum BusinessApiUri {
+  //PROD
+  orgTypes(uri: '$baseUrlApiBusAppV1/org/type'),
+  addOrg(uri: '$baseUrlApiBusAppV1/org'),
+  orgList(uri: '$baseUrlApiBusAppV1/org'),
+  orgInfo(uri: '$baseUrlApiBusAppV1/org/<orgId>'),
+  addOrgEmp(uri: '$baseUrlApiBusAppV1/org/<orgId>/emp'),
+  orgEmp(uri: '$baseUrlApiBusAppV1/org/<orgId>/emp'),
+  deleteOrgEmp(uri: '$baseUrlApiBusAppV1/org/<orgId>/emp/<orgEmpId>'),
+  patchOrgEmp(uri: '$baseUrlApiBusAppV1/org/<orgId>/emp/<orgEmpId>'),
+  addOrgGst(uri: '$baseUrlApiBusAppV1/org/<orgId>/gst'),
+  orgGstList(uri: '$baseUrlApiBusAppV1/org/<orgId>/gst'),
+  //DEV
+  doNotUse(uri: '');
+
+  const BusinessApiUri({
+    required this.uri,
+  });
+
+  final String uri;
+}
