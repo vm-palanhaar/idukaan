@@ -7,6 +7,7 @@ import 'package:idukaan/controller/rest_api.dart';
 import 'package:idukaan/model/main/business/add/add_org_req_mdl.dart';
 import 'package:idukaan/model/main/business/add/add_org_res_mdl.dart';
 import 'package:idukaan/model/main/business/add/org_types_mdl.dart';
+import 'package:idukaan/model/main/business/list/org_list_res_mdl.dart';
 
 class BusinessCtrlApi extends HandleErrorsApi {
   late String _token;
@@ -28,9 +29,11 @@ class BusinessCtrlApi extends HandleErrorsApi {
       );
       var resDecode = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        list = resDecode
-            .map<OrgTypesMdl>((json) => OrgTypesMdl.fromJson(json))
-            .toList();
+        list = resDecode.map<OrgTypesMdl>(
+          (json) {
+            return OrgTypesMdl.fromJson(json);
+          },
+        ).toList();
       } else {
         //TODO: handle error codes
       }
@@ -76,5 +79,31 @@ class BusinessCtrlApi extends HandleErrorsApi {
       }
     }
     return res;
+  }
+
+  Future<OrgListResMdl?> getOrgListApi({
+    required BuildContext context,
+    required bool showError,
+  }) async {
+    super.context = context;
+    super.showError = showError;
+    OrgListResMdl? orgList;
+    if (await checkInternetConnectivity()) {
+      var response = await http.get(
+        Uri.parse(BusinessApiUri.orgList.uri),
+        headers: {
+          'Authorization': 'Token $_token',
+        },
+      );
+      var resDecode = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        orgList = OrgListResMdl.success(resDecode);
+      } else if (response.statusCode == 400) {
+        orgList = OrgListResMdl.failed(resDecode);
+      } else {
+        //TODO: handle error codes
+      }
+    }
+    return orgList;
   }
 }

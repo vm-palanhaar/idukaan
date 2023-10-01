@@ -42,4 +42,18 @@ class BusinessCtrl extends BusinessCtrlMdl {
     );
     notifyListeners();
   }
+
+  Future<void> getOrgListApi({
+    required BuildContext context,
+    required bool reload,
+  }) async {
+    if (orgList == null || orgList!.org.isEmpty || reload) {
+      orgList = null;
+      orgList = await _busApi.getOrgListApi(
+        context: context,
+        showError: true,
+      );
+      notifyListeners();
+    }
+  }
 }
