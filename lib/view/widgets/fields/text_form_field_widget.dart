@@ -36,7 +36,7 @@ class TextFormFieldWidget extends StatelessWidget {
             }
           }
           if (value!.isEmpty) {
-            return '$labelText!';
+            return '$labelText !';
           } else {
             onFieldSubmitted(value);
             return null;

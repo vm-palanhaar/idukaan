@@ -21,11 +21,25 @@ class BusinessCtrl extends BusinessCtrlMdl {
   Future<void> getOrgTypesApi({
     required BuildContext context,
   }) async {
-    orgTypeList = await _busApi.getOrgTypesApi(
+    if (orgTypeList.isEmpty) {
+      orgTypeList = await _busApi.getOrgTypesApi(
+        context: context,
+        showError: false,
+      );
+    }
+    if (orgTypeList.isNotEmpty) {
+      addOrg.setType(orgTypeList.first);
+    }
+  }
+
+  Future<void> postOrgApi({
+    required BuildContext context,
+  }) async {
+    addOrgRes = await _busApi.postOrgApi(
       context: context,
-      showError: false,
+      showError: true,
+      addOrg: addOrg,
     );
-    addOrg.setType(orgTypeList.first);
     notifyListeners();
   }
 }

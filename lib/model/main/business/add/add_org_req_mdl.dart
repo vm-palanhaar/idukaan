@@ -15,4 +15,10 @@ class AddOrgReqMdl {
   String get getName => _name;
   String get getRegNo => _regNo;
   String get getDoc => _doc;
+
+  void setInitValues() {
+    _name = '';
+    _regNo = '';
+    _doc = '';
+  }
 }

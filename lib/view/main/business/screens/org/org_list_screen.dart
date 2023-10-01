@@ -21,9 +21,7 @@ class OrgListScreen extends StatelessWidget {
         onPressed: () {
           Navigator.pushNamed(context, AddOrgScreen.id);
         },
-        child: const Icon(
-          Icons.add_business_outlined,
-        ),
+        child: const Icon(Icons.add),
       ),
     );
   }
