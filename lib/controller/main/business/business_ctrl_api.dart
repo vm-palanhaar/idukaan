@@ -7,6 +7,7 @@ import 'package:idukaan/controller/rest_api.dart';
 import 'package:idukaan/model/main/business/add/add_org_req_mdl.dart';
 import 'package:idukaan/model/main/business/add/add_org_res_mdl.dart';
 import 'package:idukaan/model/main/business/add/org_types_mdl.dart';
+import 'package:idukaan/model/main/business/info/org_info_res_mdl.dart';
 import 'package:idukaan/model/main/business/list/org_list_res_mdl.dart';
 
 class BusinessCtrlApi extends HandleErrorsApi {
@@ -105,5 +106,34 @@ class BusinessCtrlApi extends HandleErrorsApi {
       }
     }
     return orgList;
+  }
+
+  Future<OrgInfoResMdl?> getOrgInfoApi({
+    required BuildContext context,
+    required bool showError,
+    required String orgId,
+  }) async {
+    super.context = context;
+    super.showError = showError;
+    OrgInfoResMdl? orgInfo;
+    if (await checkInternetConnectivity()) {
+      String uri = BusinessApiUri.orgInfo.uri;
+      uri = uri.replaceAll("<orgId>", orgId);
+      var response = await http.get(
+        Uri.parse(uri),
+        headers: {
+          'Authorization': 'Token $_token',
+        },
+      );
+      var resDecode = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        orgInfo = OrgInfoResMdl.success(resDecode);
+      } else if (response.statusCode == 403) {
+        orgInfo = OrgInfoResMdl.failed(resDecode);
+      } else {
+        //TODO: handle error codes
+      }
+    }
+    return orgInfo;
   }
 }

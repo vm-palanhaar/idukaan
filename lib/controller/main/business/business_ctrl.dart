@@ -56,4 +56,15 @@ class BusinessCtrl extends BusinessCtrlMdl {
       notifyListeners();
     }
   }
+
+  Future<void> getOrgInfoApi({
+    required BuildContext context,
+  }) async {
+    orgInfo = await _busApi.getOrgInfoApi(
+      context: context,
+      showError: true,
+      orgId: org!.id,
+    );
+    notifyListeners();
+  }
 }

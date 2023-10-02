@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:idukaan/controller/main/business/business_ctrl.dart';
 import 'package:idukaan/view/main/business/screens/org/add_org_screen.dart';
+import 'package:idukaan/view/main/business/screens/org/org_info_screen.dart';
 import 'package:idukaan/view/main/business/screens/org/org_list_screen.dart';
 import 'package:idukaan/view/main/business/screens/org/org_opts_screen.dart';
 import 'package:idukaan/view/main/dashboard/dashboard_screen.dart';
@@ -56,6 +57,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                 OrgListScreen.id: (_) => const OrgListScreen(),
                 AddOrgScreen.id: (_) => const AddOrgScreen(),
                 OrgOptsScreen.id: (_) => const OrgOptsScreen(),
+                OrgInfoScreen.id: (_) => const OrgInfoScreen(),
               },
               home: Scaffold(
                 body: TabBarView(
