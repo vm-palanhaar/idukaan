@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:idukaan/controller/main/business/business_ctrl.dart';
+import 'package:idukaan/view/main/business/screens/org/org_opts_screen.dart';
 import 'package:idukaan/view/widgets/ctext_error_widget.dart';
 import 'package:idukaan/view/widgets/loading_widget.dart';
 import 'package:idukaan/view/widgets/verified_widget.dart';
@@ -48,12 +49,16 @@ class _OrgListOLSWidgetState extends State<OrgListOLSWidget> {
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
                     child: ListTile(
-                      title: Text(ctrl.orgList!.org.elementAt(index).name,
-                      textDirection: TextDirection.ltr,),
+                      title: Text(
+                        ctrl.orgList!.org.elementAt(index).name,
+                        textDirection: TextDirection.ltr,
+                      ),
                       trailing: VerifiedWidget(
                         isVer: ctrl.orgList!.org.elementAt(index).isVer,
                       ),
                       onTap: () {
+                        ctrl.org = ctrl.orgList!.org.elementAt(index);
+                        Navigator.pushNamed(context, OrgOptsScreen.id);
                         //TODO: Design a screen for org options w.r.t. to isActive and isVer
                       },
                     ),

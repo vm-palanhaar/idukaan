@@ -10,7 +10,7 @@ enum BottomNavBarUtil {
     label: 'Business',
   ),
   shop(
-    icon: Icon(Icons.storefront_outlined),
+    icon: Icon(Icons.store_outlined),
     label: 'Stall/Shop',
   ),
   profile(
