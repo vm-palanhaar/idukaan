@@ -36,13 +36,17 @@ class _OrgInfoScreenState extends State<OrgInfoScreen> {
         return Scaffold(
           appBar: appBar(
             context: context,
-            title: ctrl.org!.name,
+            title: 'Enterprise Info',
           ),
           body: SingleChildScrollView(
             child: Container(
               margin: screenMargin(context),
               child: Column(
                 children: <Widget>[
+                  ListTile(
+                    title: const Text('Business Enterprise'),
+                    subtitle: Text(ctrl.orgInfo!.org!.name),
+                  ),
                   ListTile(
                     title: const Text('Type of Business Enterprise'),
                     subtitle: Text(ctrl.orgInfo!.org!.type),

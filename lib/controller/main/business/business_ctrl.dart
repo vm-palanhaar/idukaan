@@ -67,4 +67,16 @@ class BusinessCtrl extends BusinessCtrlMdl {
     );
     notifyListeners();
   }
+
+  Future<void> postOrgEmpApi({
+    required BuildContext context,
+  }) async {
+    addOrgEmp.setOrg(org!.id);
+    addOrgEmpRes = await _busApi.postOrgEmpApi(
+      context: context,
+      addOrgEmp: addOrgEmp,
+      showError: true,
+    );
+    notifyListeners();
+  }
 }

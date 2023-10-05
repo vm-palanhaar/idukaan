@@ -7,6 +7,8 @@ import 'package:idukaan/controller/rest_api.dart';
 import 'package:idukaan/model/main/business/add/add_org_req_mdl.dart';
 import 'package:idukaan/model/main/business/add/add_org_res_mdl.dart';
 import 'package:idukaan/model/main/business/add/org_types_mdl.dart';
+import 'package:idukaan/model/main/business/emp/add/add_org_emp_req_mdl.dart';
+import 'package:idukaan/model/main/business/emp/add/add_org_emp_res_mdl.dart';
 import 'package:idukaan/model/main/business/info/org_info_res_mdl.dart';
 import 'package:idukaan/model/main/business/list/org_list_res_mdl.dart';
 
@@ -135,5 +137,45 @@ class BusinessCtrlApi extends HandleErrorsApi {
       }
     }
     return orgInfo;
+  }
+
+  Future<AddOrgEmpResMdl?> postOrgEmpApi({
+    required BuildContext context,
+    required AddOrgEmpReqMdl addOrgEmp,
+    required bool showError,
+  }) async {
+    super.context = context;
+    super.showError = showError;
+    AddOrgEmpResMdl? res;
+    if (await checkInternetConnectivity()) {
+      String uri = BusinessApiUri.addOrgEmp.uri;
+      uri = uri.replaceAll("<orgId>", addOrgEmp.getOrg);
+      var response = await http.post(
+        Uri.parse(uri),
+        body: {
+          'org': addOrgEmp.getOrg,
+          'user': addOrgEmp.getUser,
+          'is_manager': addOrgEmp.getIsMng,
+        },
+        headers: {
+          'Authorization': 'Token $_token',
+        },
+      );
+      var resDecode = jsonDecode(response.body);
+      if (response.statusCode == 201) {
+        res = AddOrgEmpResMdl.success(resDecode);
+      }
+      if (response.statusCode == 400) {
+        res = AddOrgEmpResMdl.failed(resDecode);
+      }
+      if (response.statusCode == 403) {
+        res = AddOrgEmpResMdl.failed(resDecode);
+        //TODO: Logout user and show alert message as user account blocked
+      }
+      if (response.statusCode == 409) {
+        res = AddOrgEmpResMdl.failed(resDecode);
+      }
+    }
+    return res;
   }
 }
