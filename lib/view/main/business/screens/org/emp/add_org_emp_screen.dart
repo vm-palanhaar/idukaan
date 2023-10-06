@@ -39,6 +39,7 @@ class _AddOrgEmpScreenState extends State<AddOrgEmpScreen> {
         ),
       ),
     );
+    Navigator.pop(context);
   }
 
   void _successResponse() {
@@ -46,7 +47,12 @@ class _AddOrgEmpScreenState extends State<AddOrgEmpScreen> {
       title: 'Successful Onboarding',
       text: ctrl.addOrgEmpRes!.message,
     );
-    Navigator.pop(context);
+  }
+  void _failedResponse() {
+    showXDialog(
+      title: 'Onboarding Failed',
+      text: ctrl.addOrgEmpRes!.error!.msg,
+    );
   }
 
   @override
@@ -90,7 +96,7 @@ class _AddOrgEmpScreenState extends State<AddOrgEmpScreen> {
                             ctrl.addOrgEmpRes!.message.isNotEmpty) {
                           _successResponse();
                         } else if (ctrl.addOrgEmpRes!.error != null) {
-                          //TODO: show alert dialog and move back to screen
+                          _failedResponse();
                         }
                       }
                     }
