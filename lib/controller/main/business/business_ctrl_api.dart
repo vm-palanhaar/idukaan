@@ -9,6 +9,7 @@ import 'package:idukaan/model/main/business/add/add_org_res_mdl.dart';
 import 'package:idukaan/model/main/business/add/org_types_mdl.dart';
 import 'package:idukaan/model/main/business/emp/add/add_org_emp_req_mdl.dart';
 import 'package:idukaan/model/main/business/emp/add/add_org_emp_res_mdl.dart';
+import 'package:idukaan/model/main/business/emp/list/org_emp_list_res_mdl.dart';
 import 'package:idukaan/model/main/business/info/org_info_res_mdl.dart';
 import 'package:idukaan/model/main/business/list/org_list_res_mdl.dart';
 
@@ -175,6 +176,35 @@ class BusinessCtrlApi extends HandleErrorsApi {
       }
       if (response.statusCode == 409) {
         res = AddOrgEmpResMdl.failed(resDecode);
+      }
+    }
+    return res;
+  }
+
+  Future<OrgEmpListResMdl?> getOrgEmpListApi({
+    required BuildContext context,
+    required bool showError,
+    required String orgId,
+  }) async {
+    super.context = context;
+    super.showError = showError;
+    OrgEmpListResMdl? res;
+    if (await checkInternetConnectivity()) {
+      String uri = BusinessApiUri.orgEmpList.uri;
+      uri = uri.replaceAll("<orgId>", orgId);
+      var response = await http.get(
+        Uri.parse(uri),
+        headers: {
+          'Authorization': 'Token $_token',
+        },
+      );
+      var resDecode = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        res = OrgEmpListResMdl.success(resDecode);
+      } else if (response.statusCode == 403) {
+        res = OrgEmpListResMdl.failed(resDecode);
+      } else {
+        //TODO: handle error codes
       }
     }
     return res;

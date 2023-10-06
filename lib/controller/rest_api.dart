@@ -28,7 +28,7 @@ enum BusinessApiUri {
   orgList(uri: '$baseUrlApiBusAppV1/org'),
   orgInfo(uri: '$baseUrlApiBusAppV1/org/<orgId>'),
   addOrgEmp(uri: '$baseUrlApiBusAppV1/org/<orgId>/emp'),
-  orgEmp(uri: '$baseUrlApiBusAppV1/org/<orgId>/emp'),
+  orgEmpList(uri: '$baseUrlApiBusAppV1/org/<orgId>/emp'),
   deleteOrgEmp(uri: '$baseUrlApiBusAppV1/org/<orgId>/emp/<orgEmpId>'),
   patchOrgEmp(uri: '$baseUrlApiBusAppV1/org/<orgId>/emp/<orgEmpId>'),
   addOrgGst(uri: '$baseUrlApiBusAppV1/org/<orgId>/gst'),

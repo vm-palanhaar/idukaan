@@ -4,9 +4,11 @@ import 'package:idukaan/view/widgets/text_widget.dart';
 class CalendarWidget extends StatefulWidget {
   final String title;
   final Function onTap;
+  final DateTime lastDate;
   const CalendarWidget({
     required this.title,
     required this.onTap,
+    required this.lastDate,
     Key? key,
   }) : super(key: key);
 
@@ -28,8 +30,8 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         final DateTime? picked = await showDatePicker(
           context: context,
           initialDate: selectedDate, // Refer step 1
-          firstDate: DateTime(1990),
-          lastDate: DateTime(2050),
+          firstDate: DateTime(1978),
+          lastDate: widget.lastDate,
         );
         if (picked != null && picked != selectedDate) {
           setState(

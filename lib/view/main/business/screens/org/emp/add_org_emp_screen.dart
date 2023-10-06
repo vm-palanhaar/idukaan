@@ -108,6 +108,7 @@ class _AddOrgEmpScreenState extends State<AddOrgEmpScreen> {
                 CalendarWidget(
                   title: 'Joining Date',
                   onTap: ctrl.addOrgEmp.setJDate,
+                  lastDate: DateTime.now(),
                 ),
                 ElevatedButtonWidget(
                   title: 'Onboard',
