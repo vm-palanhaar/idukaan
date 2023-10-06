@@ -3,8 +3,10 @@ import 'package:idukaan/controller/main/business/business_ctrl.dart';
 import 'package:idukaan/view/util/app_bar.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/buttons/elevated_button_widget.dart';
+import 'package:idukaan/view/widgets/fields/calendar_widget.dart';
 import 'package:idukaan/view/widgets/fields/switch_widget.dart';
 import 'package:idukaan/view/widgets/fields/text_form_field_widget.dart';
+import 'package:idukaan/view/widgets/text_error_widget.dart';
 import 'package:provider/provider.dart';
 
 class AddOrgEmpScreen extends StatefulWidget {
@@ -17,13 +19,28 @@ class AddOrgEmpScreen extends StatefulWidget {
 
 class _AddOrgEmpScreenState extends State<AddOrgEmpScreen> {
   final _addOrgEmpKey = GlobalKey<FormState>();
-  late BusinessCtrl ctrl;
+  bool _errorIsJDate = false;
 
+  late BusinessCtrl ctrl;
   @override
   void initState() {
     ctrl = Provider.of<BusinessCtrl>(context, listen: false);
+    ctrl.addOrgEmp.setInitValues();
     ctrl.addOrgEmpRes = null;
     super.initState();
+  }
+
+  bool _validateFormAddOrgEmp() {
+    if (ctrl.addOrgEmp.getJDate.isEmpty) {
+      setState(() {
+        _errorIsJDate = true;
+      });
+      return false;
+    }
+    setState(() {
+      _errorIsJDate = false;
+    });
+    return true;
   }
 
   void showXDialog({
@@ -48,6 +65,7 @@ class _AddOrgEmpScreenState extends State<AddOrgEmpScreen> {
       text: ctrl.addOrgEmpRes!.message,
     );
   }
+
   void _failedResponse() {
     showXDialog(
       title: 'Onboarding Failed',
@@ -85,18 +103,27 @@ class _AddOrgEmpScreenState extends State<AddOrgEmpScreen> {
                     });
                   },
                 ),
+                if (_errorIsJDate)
+                  const TextErrorWidget(text: 'Joining Date !'),
+                CalendarWidget(
+                  title: 'Joining Date',
+                  onTap: ctrl.addOrgEmp.setJDate,
+                ),
                 ElevatedButtonWidget(
                   title: 'Onboard',
                   onPressed: () async {
+                    _validateFormAddOrgEmp();
                     if (_addOrgEmpKey.currentState!.validate()) {
-                      await ctrl.postOrgEmpApi(context: context);
-                      if (ctrl.addOrgEmpRes != null &&
-                          ctrl.org!.id == ctrl.addOrgEmpRes!.orgId) {
-                        if (ctrl.addOrgEmpRes!.orgEmp != null &&
-                            ctrl.addOrgEmpRes!.message.isNotEmpty) {
-                          _successResponse();
-                        } else if (ctrl.addOrgEmpRes!.error != null) {
-                          _failedResponse();
+                      if (_validateFormAddOrgEmp()) {
+                        await ctrl.postOrgEmpApi(context: context);
+                        if (ctrl.addOrgEmpRes != null &&
+                            ctrl.org!.id == ctrl.addOrgEmpRes!.orgId) {
+                          if (ctrl.addOrgEmpRes!.orgEmp != null &&
+                              ctrl.addOrgEmpRes!.message.isNotEmpty) {
+                            _successResponse();
+                          } else if (ctrl.addOrgEmpRes!.error != null) {
+                            _failedResponse();
+                          }
                         }
                       }
                     }

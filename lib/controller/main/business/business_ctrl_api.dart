@@ -156,6 +156,7 @@ class BusinessCtrlApi extends HandleErrorsApi {
           'org': addOrgEmp.getOrg,
           'user': addOrgEmp.getUser,
           'is_manager': addOrgEmp.getIsMng,
+          'join_date': addOrgEmp.getJDate,
         },
         headers: {
           'Authorization': 'Token $_token',
