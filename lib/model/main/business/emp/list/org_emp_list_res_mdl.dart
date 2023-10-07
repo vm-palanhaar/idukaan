@@ -3,7 +3,7 @@ import 'package:idukaan/model/main/business/emp/list/org_emp_list_sobj_res_mdl.d
 
 class OrgEmpListResMdl {
   final String orgId;
-  final List<OrgEmpListSObjResMdl> emp;
+  List<OrgEmpListSObjResMdl> emp;
   final ErrorMdl? error;
 
   OrgEmpListResMdl({
@@ -15,8 +15,11 @@ class OrgEmpListResMdl {
   factory OrgEmpListResMdl.success(Map<String, dynamic> json) {
     var list = json['org_emp_list'] as List;
     return OrgEmpListResMdl(
-      orgId: json["orgId"] as String,
-      emp: list.map<OrgEmpListSObjResMdl>((json) => OrgEmpListSObjResMdl.fromJson(json)).toList(),
+      orgId: json["org_id"] as String,
+      emp: list
+          .map<OrgEmpListSObjResMdl>(
+              (json) => OrgEmpListSObjResMdl.fromJson(json))
+          .toList(),
       error: null,
     );
   }

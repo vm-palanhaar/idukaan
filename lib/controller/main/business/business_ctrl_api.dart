@@ -9,7 +9,10 @@ import 'package:idukaan/model/main/business/add/add_org_res_mdl.dart';
 import 'package:idukaan/model/main/business/add/org_types_mdl.dart';
 import 'package:idukaan/model/main/business/emp/add/add_org_emp_req_mdl.dart';
 import 'package:idukaan/model/main/business/emp/add/add_org_emp_res_mdl.dart';
+import 'package:idukaan/model/main/business/emp/delete/delete_org_emp_res_mdl.dart';
 import 'package:idukaan/model/main/business/emp/list/org_emp_list_res_mdl.dart';
+import 'package:idukaan/model/main/business/emp/patch/update_org_emp_req_mdl.dart';
+import 'package:idukaan/model/main/business/emp/patch/update_org_emp_res_mdl.dart';
 import 'package:idukaan/model/main/business/info/org_info_res_mdl.dart';
 import 'package:idukaan/model/main/business/list/org_list_res_mdl.dart';
 
@@ -209,4 +212,81 @@ class BusinessCtrlApi extends HandleErrorsApi {
     }
     return res;
   }
+
+  Future<UpdateOrgEmpResMdl?> patchOrgEmpApi({
+    required BuildContext context,
+    required bool showError,
+    required UpdateOrgEmpReqMdl updateEmp,
+  }) async {
+    super.context = context;
+    super.showError = showError;
+    UpdateOrgEmpResMdl? res;
+    if (await checkInternetConnectivity()) {
+      String uri = BusinessApiUri.patchOrgEmp.uri;
+      uri = uri.replaceAll("<orgId>", updateEmp.getOrg);
+      uri = uri.replaceAll("<orgEmpId>", updateEmp.getId);
+      var response = await http.patch(
+        Uri.parse(uri),
+        body: {
+          'id': updateEmp.getId,
+          'is_manager': updateEmp.getIsMng,
+          'join_date': updateEmp.getJDate,
+        },
+        headers: {
+          'Authorization': 'Token $_token',
+        },
+      );
+      var resDecode = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        res = UpdateOrgEmpResMdl.success(resDecode);
+      }
+      if (response.statusCode == 400) {
+        res = UpdateOrgEmpResMdl.failed(resDecode);
+      }
+      if (response.statusCode == 403) {
+        res = UpdateOrgEmpResMdl.failed(resDecode);
+        //TODO: Logout user and show alert message as user account blocked
+      }
+    }
+    return res;
+  }
+
+  Future<DeleteOrgEmpResMdl?> deleteOrgEmpApi({
+    required BuildContext context,
+    required bool showError,
+    required String orgId,
+    required String empId,
+  }) async {
+    super.context = context;
+    super.showError = showError;
+    DeleteOrgEmpResMdl? res;
+    if (await checkInternetConnectivity()) {
+      String uri = BusinessApiUri.deleteOrgEmp.uri;
+      uri = uri.replaceAll("<orgId>", orgId);
+      uri = uri.replaceAll("<orgEmpId>", empId);
+      var response = await http.delete(
+        Uri.parse(uri),
+        body: {
+          'id': empId,
+        },
+        headers: {
+          'Authorization': 'Token $_token',
+        },
+      );
+      var resDecode = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        res = DeleteOrgEmpResMdl.success(resDecode);
+      }
+      if (response.statusCode == 400) {
+        res = DeleteOrgEmpResMdl.failed(resDecode);
+      }
+      if (response.statusCode == 403) {
+        res = DeleteOrgEmpResMdl.failed(resDecode);
+        //TODO: Logout user and show alert message as user account blocked
+      }
+    }
+    return res;
+  }
+
+
 }

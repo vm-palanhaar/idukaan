@@ -40,6 +40,7 @@ class BusinessCtrl extends BusinessCtrlMdl {
       showError: true,
       addOrg: addOrg,
     );
+    addOrg.setInitValues();
     notifyListeners();
   }
 
@@ -77,6 +78,7 @@ class BusinessCtrl extends BusinessCtrlMdl {
       addOrgEmp: addOrgEmp,
       showError: true,
     );
+    addOrgEmp.setInitValues();
     notifyListeners();
   }
 
@@ -93,5 +95,31 @@ class BusinessCtrl extends BusinessCtrlMdl {
       );
       notifyListeners();
     }
+  }
+
+  Future<void> patchOrgEmpApi({
+    required BuildContext context,
+  }) async {
+    updateOrgEmp.setOrg(org!.id);
+    updateOrgEmpRes = await _busApi.patchOrgEmpApi(
+      context: context,
+      showError: true,
+      updateEmp: updateOrgEmp,
+    );
+    updateOrgEmp.setInitValues();
+    notifyListeners();
+  }
+
+  Future<void> deleteOrgEmpApi({
+    required BuildContext context,
+    required String empId,
+  }) async {
+    deleteOrgEmpRes = await _busApi.deleteOrgEmpApi(
+      context: context,
+      showError: true,
+      orgId: org!.id,
+      empId: empId,
+    );
+    notifyListeners();
   }
 }

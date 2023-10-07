@@ -67,7 +67,7 @@ class _OrgOptsScreenState extends State<OrgOptsScreen> {
             SliverGrid.count(
               crossAxisCount: 2,
               children: [
-                if (ctrl.org!.isActive)
+                if (ctrl.org!.isActive && ctrl.org!.empMng)
                   OptWidget(
                     icon: OrgOptUtil.addShop.icon,
                     title: OrgOptUtil.addShop.name,
