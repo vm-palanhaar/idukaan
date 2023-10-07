@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 enum OrgOptUtil {
   addShop(icon: Icons.add_business, name: 'Add Stall/Shop'),
   manageShops(icon: Icons.store, name: 'Manage Stall/Shop(s)'),
-  hR(icon: Icons.people, name: 'Human Resource'),
+  hR(icon: Icons.people, name: 'Employees'),
   legal(icon: Icons.safety_check, name: 'Legal'),
   info(icon: Icons.info, name: 'Info'),
   sH(icon: Icons.settings, name: 'Settings and Help');

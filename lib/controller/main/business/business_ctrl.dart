@@ -40,6 +40,7 @@ class BusinessCtrl extends BusinessCtrlMdl {
       showError: true,
       addOrg: addOrg,
     );
+    addOrg.setInitValues();
     notifyListeners();
   }
 
@@ -55,5 +56,70 @@ class BusinessCtrl extends BusinessCtrlMdl {
       );
       notifyListeners();
     }
+  }
+
+  Future<void> getOrgInfoApi({
+    required BuildContext context,
+  }) async {
+    orgInfo = await _busApi.getOrgInfoApi(
+      context: context,
+      showError: true,
+      orgId: org!.id,
+    );
+    notifyListeners();
+  }
+
+  Future<void> postOrgEmpApi({
+    required BuildContext context,
+  }) async {
+    addOrgEmp.setOrg(org!.id);
+    addOrgEmpRes = await _busApi.postOrgEmpApi(
+      context: context,
+      addOrgEmp: addOrgEmp,
+      showError: true,
+    );
+    addOrgEmp.setInitValues();
+    notifyListeners();
+  }
+
+  Future<void> getOrgEmpListApi({
+    required BuildContext context,
+    required bool reload,
+  }) async {
+    if (orgEmpList == null || orgEmpList!.emp.isEmpty || reload) {
+      orgEmpList = null;
+      orgEmpList = await _busApi.getOrgEmpListApi(
+        context: context,
+        showError: true,
+        orgId: org!.id,
+      );
+      notifyListeners();
+    }
+  }
+
+  Future<void> patchOrgEmpApi({
+    required BuildContext context,
+  }) async {
+    updateOrgEmp.setOrg(org!.id);
+    updateOrgEmpRes = await _busApi.patchOrgEmpApi(
+      context: context,
+      showError: true,
+      updateEmp: updateOrgEmp,
+    );
+    updateOrgEmp.setInitValues();
+    notifyListeners();
+  }
+
+  Future<void> deleteOrgEmpApi({
+    required BuildContext context,
+    required String empId,
+  }) async {
+    deleteOrgEmpRes = await _busApi.deleteOrgEmpApi(
+      context: context,
+      showError: true,
+      orgId: org!.id,
+      empId: empId,
+    );
+    notifyListeners();
   }
 }

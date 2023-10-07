@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:idukaan/controller/main/business/business_ctrl.dart';
 import 'package:idukaan/view/main/business/screens/org/org_opts_screen.dart';
+import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/ctext_error_widget.dart';
 import 'package:idukaan/view/widgets/loading_widget.dart';
 import 'package:idukaan/view/widgets/verified_widget.dart';
@@ -36,36 +37,38 @@ class _OrgListOLSWidgetState extends State<OrgListOLSWidget> {
       if (ctrl.orgList!.org.isNotEmpty) {
         return RefreshIndicator(
           onRefresh: () async => await getOrgList(true),
-          child: CustomScrollView(
-            slivers: [
-              SliverList.separated(
-                itemCount: ctrl.orgList!.org.length,
-                separatorBuilder: (context, index) {
-                  if (index != ctrl.orgList!.org.length - 1) {
-                    return const Divider();
-                  }
-                  return null;
-                },
-                itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                    child: ListTile(
-                      title: Text(
-                        ctrl.orgList!.org.elementAt(index).name,
-                        textDirection: TextDirection.ltr,
+          child: Container(
+            margin: screenMargin(context),
+            child: CustomScrollView(
+              slivers: [
+                SliverList.separated(
+                  itemCount: ctrl.orgList!.org.length,
+                  separatorBuilder: (context, index) {
+                    if (index != ctrl.orgList!.org.length - 1) {
+                      return const Divider();
+                    }
+                    return null;
+                  },
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      child: ListTile(
+                        title: Text(
+                          ctrl.orgList!.org.elementAt(index).name,
+                          textDirection: TextDirection.ltr,
+                        ),
+                        trailing: VerifiedWidget(
+                          isVer: ctrl.orgList!.org.elementAt(index).isVer,
+                        ),
+                        onTap: () {
+                          ctrl.org = ctrl.orgList!.org.elementAt(index);
+                          Navigator.pushNamed(context, OrgOptsScreen.id);
+                        },
                       ),
-                      trailing: VerifiedWidget(
-                        isVer: ctrl.orgList!.org.elementAt(index).isVer,
-                      ),
-                      onTap: () {
-                        ctrl.org = ctrl.orgList!.org.elementAt(index);
-                        Navigator.pushNamed(context, OrgOptsScreen.id);
-                        //TODO: Design a screen for org options w.r.t. to isActive and isVer
-                      },
-                    ),
-                  );
-                },
-              ),
-            ],
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         );
       } else if (ctrl.orgList!.error != null) {

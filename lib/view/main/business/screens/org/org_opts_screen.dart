@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:idukaan/controller/main/business/business_ctrl.dart';
 import 'package:idukaan/model/main/business/util/org_opts.dart';
+import 'package:idukaan/view/main/business/screens/org/emp/org_emp_list_screen.dart';
+import 'package:idukaan/view/main/business/screens/org/org_info_screen.dart';
 import 'package:idukaan/view/util/app_bar.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/opt_widget.dart';
@@ -38,12 +40,16 @@ class _OrgOptsScreenState extends State<OrgOptsScreen> {
     );
   }
 
-  void showOrgVerMsg() {
+  void showOrgVerMsg({
+    required String pageId,
+  }) {
     if (!ctrl.org!.isVer) {
       showXDialog(
         title: 'Attention Required',
         text: ctrl.orgList!.isVerMsg,
       );
+    } else {
+      Navigator.pushNamed(context, pageId);
     }
   }
 
@@ -61,12 +67,12 @@ class _OrgOptsScreenState extends State<OrgOptsScreen> {
             SliverGrid.count(
               crossAxisCount: 2,
               children: [
-                if (ctrl.org!.isActive)
+                if (ctrl.org!.isActive && ctrl.org!.empMng)
                   OptWidget(
                     icon: OrgOptUtil.addShop.icon,
                     title: OrgOptUtil.addShop.name,
                     onTap: () {
-                      showOrgVerMsg();
+                      showOrgVerMsg(pageId: ',');
                     },
                   ),
                 if (ctrl.org!.isActive)
@@ -74,7 +80,7 @@ class _OrgOptsScreenState extends State<OrgOptsScreen> {
                     icon: OrgOptUtil.manageShops.icon,
                     title: OrgOptUtil.manageShops.name,
                     onTap: () {
-                      showOrgVerMsg();
+                      showOrgVerMsg(pageId: ',');
                     },
                   ),
                 if (ctrl.org!.isActive)
@@ -82,7 +88,7 @@ class _OrgOptsScreenState extends State<OrgOptsScreen> {
                     icon: OrgOptUtil.hR.icon,
                     title: OrgOptUtil.hR.name,
                     onTap: () {
-                      showOrgVerMsg();
+                      showOrgVerMsg(pageId: OrgEmpListScreen.id);
                     },
                   ),
                 if (ctrl.org!.isActive)
@@ -90,13 +96,15 @@ class _OrgOptsScreenState extends State<OrgOptsScreen> {
                     icon: OrgOptUtil.legal.icon,
                     title: OrgOptUtil.legal.name,
                     onTap: () {
-                      showOrgVerMsg();
+                      showOrgVerMsg(pageId: ',');
                     },
                   ),
                 OptWidget(
                   icon: OrgOptUtil.info.icon,
                   title: OrgOptUtil.info.name,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, OrgInfoScreen.id);
+                  },
                 ),
                 OptWidget(
                   icon: OrgOptUtil.sH.icon,
