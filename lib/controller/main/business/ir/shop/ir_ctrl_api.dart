@@ -7,7 +7,7 @@ import 'package:idukaan/controller/handle_errors_api.dart';
 import 'package:idukaan/controller/rest_api.dart';
 import 'package:idukaan/model/main/ir/ir_station_list_mdl.dart';
 
-class IrShopCtrlApi extends HandleErrorsApi {
+class IrCtrlApi extends HandleErrorsApi {
   late String _token;
   void setToken(String token) => _token = token;
 

@@ -4,13 +4,13 @@ import 'package:idukaan/controller/auth/auth_ctrl.dart';
 import 'package:idukaan/controller/auth/auth_ctrl_mdl.dart';
 import 'package:idukaan/controller/main/business/business_ctrl_api.dart';
 import 'package:idukaan/controller/main/business/business_ctrl_mdl.dart';
-import 'package:idukaan/controller/main/business/ir/shop/ir_shop_ctrl.dart';
+import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl.dart';
 import 'package:provider/provider.dart';
 
 class BusinessCtrl extends BusinessCtrlMdl {
   BuildContext context;
   final BusinessCtrlApi _api = BusinessCtrlApi();
-  final IrShopCtrl _irShopCtrl = IrShopCtrl();
+  final IrCtrl irCtrl = IrCtrl();
 
   BusinessCtrl({required this.context}) {
     String? token = Provider.of<AuthCtrl>(
@@ -18,7 +18,7 @@ class BusinessCtrl extends BusinessCtrlMdl {
       listen: false,
     ).appKeys[AppKey.token.key]!;
     _api.setToken(token);
-    _irShopCtrl.setTokenIrShopCtrl(token: token);
+    irCtrl.setTokenIrShopCtrl(token: token);
   }
 
   Future<void> getOrgTypesApi({

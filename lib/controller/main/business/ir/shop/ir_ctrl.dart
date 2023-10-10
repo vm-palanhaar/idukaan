@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:idukaan/controller/main/business/ir/shop/ir_shop_ctrl_api.dart';
-import 'package:idukaan/controller/main/business/ir/shop/ir_shop_ctrl_mdl.dart';
+import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl_api.dart';
+import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl_mdl.dart';
 
-class IrShopCtrl extends IrShopCtrlMdl {
-  final IrShopCtrlApi _api = IrShopCtrlApi();
+class IrCtrl extends IrCtrlMdl {
+  final IrCtrlApi _api = IrCtrlApi();
 
   void setTokenIrShopCtrl({
     required String token,
@@ -19,6 +19,7 @@ class IrShopCtrl extends IrShopCtrlMdl {
         context: context,
         showError: true,
       );
+      print(stationList!.stations.length);
       notifyListeners();
     }
   }

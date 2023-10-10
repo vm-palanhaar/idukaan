@@ -5,7 +5,7 @@ import 'package:idukaan/view/util/app_bar.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/buttons/elevated_button_widget.dart';
 import 'package:idukaan/view/widgets/fields/pick_file_widget.dart';
-import 'package:idukaan/view/widgets/fields/text_form_field_widget.dart';
+import 'package:idukaan/view/widgets/fields/textformfield_widget.dart';
 import 'package:idukaan/view/widgets/list_tile_error_widget.dart';
 import 'package:idukaan/view/widgets/text_error_widget.dart';
 import 'package:provider/provider.dart';

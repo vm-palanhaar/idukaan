@@ -1,5 +1,5 @@
 class IrStationListMdl {
-  final String lenSt;
+  final int lenSt;
   final List<String> stations;
 
   IrStationListMdl({
@@ -9,7 +9,7 @@ class IrStationListMdl {
 
   factory IrStationListMdl.fromJson(Map<String, dynamic> json) {
     return IrStationListMdl(
-      lenSt: json['total'] as String,
+      lenSt: json['total'] as int,
       stations: List<String>.from(json['stations'] as List),
     );
   }

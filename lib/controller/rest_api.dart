@@ -1,4 +1,4 @@
-const String baseUrlApi = 'http://192.168.29.176:8080/api';
+const String baseUrlApi = 'http://192.168.29.176:8000/api';
 
 //---Users---
 enum UserApiUri {
@@ -47,7 +47,7 @@ const String baseUrlApiIrAppV1 = '$baseUrlApi/idukaan/ir/v1';
 
 enum IrApiUri {
   //PROD
-  stations(uri: '$baseUrlApiIrV1/station'),
+  stations(uri: '$baseUrlApiIrV1/stations'),
   addShop(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop'),
   orgShops(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop'),
   shopInfo(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<orgShopId>'),

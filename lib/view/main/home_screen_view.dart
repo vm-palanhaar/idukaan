@@ -6,6 +6,7 @@ import 'package:idukaan/view/main/business/screens/org/emp/org_emp_list_screen.d
 import 'package:idukaan/view/main/business/screens/org/org_info_screen.dart';
 import 'package:idukaan/view/main/business/screens/org/org_list_screen.dart';
 import 'package:idukaan/view/main/business/screens/org/org_opts_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_screen_view.dart';
 import 'package:idukaan/view/main/dashboard/dashboard_screen.dart';
 import 'package:idukaan/view/main/profile/profile_screen.dart';
 import 'package:idukaan/view/main/shop/shop_screen.dart';
@@ -62,6 +63,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                 OrgEmpListScreen.id: (_) => const OrgEmpListScreen(),
                 AddOrgEmpScreen.id: (_) => const AddOrgEmpScreen(),
                 OrgInfoScreen.id: (_) => const OrgInfoScreen(),
+                AddIrShopScreenView.id: (_) => const AddIrShopScreenView(),
               },
               home: Scaffold(
                 body: TabBarView(
