@@ -28,6 +28,10 @@ class _AddIrShop3ScreenState extends State<AddIrShop3Screen> {
     super.initState();
   }
 
+  String getPltType() {
+    return ctrl.addIrShop.addIrShop3.getPltType;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +60,7 @@ class _AddIrShop3ScreenState extends State<AddIrShop3Screen> {
                 DropdownOptionWidget(
                   icon: Icons.place_outlined,
                   labelText: 'Platform Type',
-                  defaultValue: ctrl.addIrShop.addIrShop3.getPltType,
+                  defaultValue: getPltType,
                   optionList: ctrl.addIrShop.addIrShop3.getPltTypes,
                   setValue: (String value) async {
                     setState(() {
