@@ -31,12 +31,31 @@ enum BusinessApiUri {
   orgEmpList(uri: '$baseUrlApiBusAppV1/org/<orgId>/emp'),
   deleteOrgEmp(uri: '$baseUrlApiBusAppV1/org/<orgId>/emp/<orgEmpId>'),
   patchOrgEmp(uri: '$baseUrlApiBusAppV1/org/<orgId>/emp/<orgEmpId>'),
-  addOrgGst(uri: '$baseUrlApiBusAppV1/org/<orgId>/gst'),
-  orgGstList(uri: '$baseUrlApiBusAppV1/org/<orgId>/gst'),
   //DEV
   doNotUse(uri: '');
 
   const BusinessApiUri({
+    required this.uri,
+  });
+
+  final String uri;
+}
+
+//---IndianRailwaysApp---
+const String baseUrlApiIrV1 = '$baseUrlApi/ir/v1';
+const String baseUrlApiIrAppV1 = '$baseUrlApi/idukaan/ir/v1';
+
+enum IrApiUri {
+  //PROD
+  stations(uri: '$baseUrlApiIrV1/station'),
+  addShop(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop'),
+  orgShops(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop'),
+  shopInfo(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<orgShopId>'),
+  patchShop(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<orgShopId>'),
+  //DEV
+  doNotUse(uri: '');
+
+  const IrApiUri({
     required this.uri,
   });
 
