@@ -31,8 +31,18 @@ class _AddIrShop4ScreenState extends State<AddIrShop4Screen> {
     super.initState();
   }
 
+  void showFetchShopLoc() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          'Your current location is being tracked for shop location!',
+        ),
+      ),
+    );
+  }
+
   bool _validateFormAddIrShop4() {
-    int total = 3;
+    int total = 4;
     int count = 0;
     if (ctrl.addIrShop.addIrShop4.getLicDoc.isEmpty) {
       _errorIsDoc = true;
@@ -52,6 +62,14 @@ class _AddIrShop4ScreenState extends State<AddIrShop4Screen> {
       _errorIsLicEd = false;
       count++;
     }
+    if (ctrl.addIrShop.addIrShop3.getLat.isNotEmpty &&
+        ctrl.addIrShop.addIrShop3.getLon.isNotEmpty) {
+      count++;
+    } else if (ctrl.addIrShop.addIrShop3.getLat.isEmpty &&
+        ctrl.addIrShop.addIrShop3.getLon.isEmpty) {
+      showFetchShopLoc();
+    }
+
     if (count == total) {
       return true;
     }
@@ -106,7 +124,9 @@ class _AddIrShop4ScreenState extends State<AddIrShop4Screen> {
                   onPressed: () async {
                     _validateFormAddIrShop4();
                     if (_irAddIrShop4Key.currentState!.validate()) {
-                      if (_validateFormAddIrShop4()) {}
+                      if (_validateFormAddIrShop4()) {
+                        await ctrl.postIrShopApi(context: context);
+                      }
                     }
                   },
                 ),

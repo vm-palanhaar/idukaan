@@ -22,14 +22,19 @@ class _AddIrShop1ScreenState extends State<AddIrShop1Screen> {
   final _irAddIrShop1Key = GlobalKey<FormState>();
   late IrCtrl ctrl;
   bool _errorIsStallImg = false;
+  bool _errorIsLoc = true;
 
   @override
   void initState() {
     ctrl = Provider.of<BusinessCtrl>(context, listen: false).irCtrl;
     ctrl.addIrShop.setInitValues();
+    ctrl.addIrShop.setOrg(
+      Provider.of<BusinessCtrl>(context, listen: false).org!.id,
+    );
     ctrl.getStationListApi(context: context);
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
+    validateLocPerm();
+    /*WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -39,6 +44,36 @@ class _AddIrShop1ScreenState extends State<AddIrShop1Screen> {
           ),
         );
       },
+    );*/
+  }
+
+  void validateLocPerm() async {
+    _errorIsLoc = await ctrl.getIrShopLoc();
+    if (_errorIsLoc) {
+      showLocPermDeniedDialog();
+    } else {}
+  }
+
+  void showLocPermDeniedDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => const AlertDialog(
+        icon: Icon(
+          Icons.location_on,
+          color: Colors.red,
+        ),
+        title: Text('Permission Denied'),
+        content: Text(
+          'To provide you with a secure and enhanced experience, our app '
+          'requires access to your location. This is essential  for '
+          'tagging your location, verifying shops, and displaying '
+          'relevant information to passengers.\n'
+          'To enable this feature, please go to your device settings and '
+          'grant permission to access your location. Your privacy and '
+          'security are of utmost importance to us, and we will only use '
+          ' this data for the purposes mentioned.',
+        ),
+      ),
     );
   }
 
@@ -98,11 +133,15 @@ class _AddIrShop1ScreenState extends State<AddIrShop1Screen> {
                 ElevatedButtonWidget(
                   title: 'Next',
                   onPressed: () {
-                    _validateFormAddIrShop1();
-                    if (_irAddIrShop1Key.currentState!.validate()) {
-                      if (_validateFormAddIrShop1()) {
-                        Navigator.pushNamed(context, AddIrShop2Screen.id);
+                    if (!_errorIsLoc) {
+                      _validateFormAddIrShop1();
+                      if (_irAddIrShop1Key.currentState!.validate()) {
+                        if (_validateFormAddIrShop1()) {
+                          Navigator.pushNamed(context, AddIrShop2Screen.id);
+                        }
                       }
+                    } else {
+                      showLocPermDeniedDialog();
                     }
                   },
                 ),

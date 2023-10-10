@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl_api.dart';
 import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl_mdl.dart';
 
@@ -11,6 +12,21 @@ class IrCtrl extends IrCtrlMdl {
     _api.setToken(token);
   }
 
+  Future<bool> getIrShopLoc() async {
+    LocationPermission permission = await Geolocator.requestPermission();
+    permission = await Geolocator.checkPermission();
+    if (permission != LocationPermission.whileInUse ||
+        permission != LocationPermission.always) {
+      return true;
+    }
+    Position? position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.best,
+    );
+    addIrShop.addIrShop3.setLat(position.latitude.toString());
+    addIrShop.addIrShop3.setLon(position.longitude.toString());
+    return false;
+  }
+
   Future<void> getStationListApi({
     required BuildContext context,
   }) async {
@@ -19,8 +35,18 @@ class IrCtrl extends IrCtrlMdl {
         context: context,
         showError: true,
       );
-      print(stationList!.stations.length);
       notifyListeners();
     }
+  }
+
+  Future<void> postIrShopApi({
+    required BuildContext context,
+  }) async {
+    addIrShopRes = await _api.postIrShopApi(
+      context: context,
+      showError: true,
+      req: addIrShop,
+    );
+    notifyListeners();
   }
 }
