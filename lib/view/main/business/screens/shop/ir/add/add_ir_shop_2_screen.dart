@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:idukaan/controller/main/business/business_ctrl.dart';
 import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl.dart';
 import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_3_screen.dart';
+import 'package:idukaan/view/main/business/util/shop/ir/add_ir_shop_util.dart';
 import 'package:idukaan/view/main/business/widgets/shop/add_shop_app_bar.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/buttons/elevated_button_widget.dart';
@@ -32,8 +33,8 @@ class _AddIrShop2ScreenState extends State<AddIrShop2Screen> {
       appBar: appBarAddShop(
         context: context,
         title: ctrl.addIrShop.addIrShop1.getName,
-        subtitle: 'accepts the following payment methods:',
-        ind: 2 / 4,
+        subtitle: AddIrShopNotes.s2AppBarNote.toLowerCase(),
+        ind: 3 / 5,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -43,8 +44,8 @@ class _AddIrShop2ScreenState extends State<AddIrShop2Screen> {
             child: Column(
               children: <Widget>[
                 SwitchWidget(
-                  icon: Icons.money_outlined,
-                  text: 'Cash',
+                  icon: AddIrShopFields.s2Cash.icon,
+                  text: AddIrShopFields.s2Cash.title,
                   defaultValue: ctrl.addIrShop.addIrShop2.getIsCash,
                   onChanged: (bool value) {
                     setState(() {
@@ -53,8 +54,8 @@ class _AddIrShop2ScreenState extends State<AddIrShop2Screen> {
                   },
                 ),
                 SwitchWidget(
-                  icon: Icons.qr_code_outlined,
-                  text: 'UPI',
+                  icon: AddIrShopFields.s2Upi.icon,
+                  text: AddIrShopFields.s2Upi.title,
                   defaultValue: ctrl.addIrShop.addIrShop2.getIsUpi,
                   onChanged: (bool value) {
                     setState(() {
@@ -63,8 +64,8 @@ class _AddIrShop2ScreenState extends State<AddIrShop2Screen> {
                   },
                 ),
                 SwitchWidget(
-                  icon: Icons.credit_card_outlined,
-                  text: 'Card',
+                  icon: AddIrShopFields.s2Card.icon,
+                  text: AddIrShopFields.s2Card.title,
                   defaultValue: ctrl.addIrShop.addIrShop2.getIsCard,
                   onChanged: (bool value) {
                     setState(() {

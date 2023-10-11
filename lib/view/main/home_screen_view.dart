@@ -6,7 +6,11 @@ import 'package:idukaan/view/main/business/screens/org/emp/org_emp_list_screen.d
 import 'package:idukaan/view/main/business/screens/org/org_info_screen.dart';
 import 'package:idukaan/view/main/business/screens/org/org_list_screen.dart';
 import 'package:idukaan/view/main/business/screens/org/org_opts_screen.dart';
-import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_screen_view.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_1_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_2_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_3_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_4_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_init_screen.dart';
 import 'package:idukaan/view/main/dashboard/dashboard_screen.dart';
 import 'package:idukaan/view/main/profile/profile_screen.dart';
 import 'package:idukaan/view/main/shop/shop_screen.dart';
@@ -60,10 +64,17 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                 OrgListScreen.id: (_) => const OrgListScreen(),
                 AddOrgScreen.id: (_) => const AddOrgScreen(),
                 OrgOptsScreen.id: (_) => const OrgOptsScreen(),
+                // add ir shop
+                AddIrShopInitScreen.id: (_) => const AddIrShopInitScreen(),
+                AddIrShop1Screen.id: (_) => const AddIrShop1Screen(),
+                AddIrShop2Screen.id: (_) => const AddIrShop2Screen(),
+                AddIrShop3Screen.id: (_) => const AddIrShop3Screen(),
+                AddIrShop4Screen.id: (_) => const AddIrShop4Screen(),
+                // org emp
                 OrgEmpListScreen.id: (_) => const OrgEmpListScreen(),
                 AddOrgEmpScreen.id: (_) => const AddOrgEmpScreen(),
                 OrgInfoScreen.id: (_) => const OrgInfoScreen(),
-                AddIrShopScreenView.id: (_) => const AddIrShopScreenView(),
+
               },
               home: Scaffold(
                 body: TabBarView(

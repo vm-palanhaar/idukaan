@@ -15,16 +15,18 @@ class IrCtrl extends IrCtrlMdl {
   Future<bool> getIrShopLoc() async {
     LocationPermission permission = await Geolocator.requestPermission();
     permission = await Geolocator.checkPermission();
-    if (permission != LocationPermission.whileInUse ||
-        permission != LocationPermission.always) {
-      return true;
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever ||
+        permission == LocationPermission.unableToDetermine) {
+      await Geolocator.openLocationSettings();
+      return false;
     }
     Position? position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.best,
     );
     addIrShop.addIrShop3.setLat(position.latitude.toString());
     addIrShop.addIrShop3.setLon(position.longitude.toString());
-    return false;
+    return true;
   }
 
   Future<void> getStationListApi({

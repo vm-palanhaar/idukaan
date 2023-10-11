@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:idukaan/controller/main/business/business_ctrl.dart';
 import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl.dart';
+import 'package:idukaan/view/main/business/screens/org/org_opts_screen.dart';
+import 'package:idukaan/view/main/business/util/shop/ir/add_ir_shop_util.dart';
 import 'package:idukaan/view/main/business/widgets/shop/add_shop_app_bar.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/buttons/elevated_button_widget.dart';
@@ -83,8 +85,8 @@ class _AddIrShop4ScreenState extends State<AddIrShop4Screen> {
       appBar: appBarAddShop(
         context: context,
         title: ctrl.addIrShop.addIrShop1.getName,
-        subtitle: 'stall license:',
-        ind: 4 / 4,
+        subtitle: AddIrShopNotes.s4AppBarNote.toLowerCase(),
+        ind: 5 / 5,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -94,26 +96,26 @@ class _AddIrShop4ScreenState extends State<AddIrShop4Screen> {
             child: Column(
               children: <Widget>[
                 TextFormFieldWidget(
-                  prefixIcon: Icons.confirmation_number_outlined,
+                  prefixIcon: AddIrShopFields.s4LicNo.icon,
+                  labelText: AddIrShopFields.s4LicNo.title,
                   keyboardType: TextInputType.name,
-                  labelText: 'License Number',
                   onFieldSubmitted: ctrl.addIrShop.addIrShop4.setLicNo,
                 ),
                 if (_errorIsDoc) const TextErrorWidget(text: 'Document !'),
                 PickFileWidget(
-                  icon: Icons.file_present_outlined,
-                  labelText: 'Document (.pdf)',
+                  icon: AddIrShopFields.s4LicDoc.icon,
+                  labelText: AddIrShopFields.s4LicDoc.title,
                   onPressed: ctrl.addIrShop.addIrShop4.setLicDoc,
                 ),
                 if (_errorIsLicSd) const TextErrorWidget(text: 'Start Date !'),
                 CalendarWidget(
-                  title: 'Start Date',
+                  title: AddIrShopFields.s4LicSd.title,
                   onTap: ctrl.addIrShop.addIrShop4.setLicSd,
                   lastDate: DateTime.now(),
                 ),
                 if (_errorIsLicEd) const TextErrorWidget(text: 'End Date !'),
                 CalendarWidget(
-                  title: 'End Date',
+                  title: AddIrShopFields.s4LicEd.title,
                   onTap: ctrl.addIrShop.addIrShop4.setLicEd,
                   lastDate: DateTime.now().add(
                     const Duration(days: 1830),
@@ -126,6 +128,8 @@ class _AddIrShop4ScreenState extends State<AddIrShop4Screen> {
                     if (_irAddIrShop4Key.currentState!.validate()) {
                       if (_validateFormAddIrShop4()) {
                         await ctrl.postIrShopApi(context: context);
+                        Navigator.popUntil(
+                            context, ModalRoute.withName(OrgOptsScreen.id));
                       }
                     }
                   },
