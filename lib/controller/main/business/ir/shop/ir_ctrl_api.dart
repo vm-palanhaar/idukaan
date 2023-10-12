@@ -7,6 +7,7 @@ import 'package:idukaan/controller/handle_errors_api.dart';
 import 'package:idukaan/controller/rest_api.dart';
 import 'package:idukaan/model/main/business/shop/ir/add/add_ir_shop_req_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/add/add_ir_shop_res_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/list/ir_shop_list_res_mdl.dart';
 import 'package:idukaan/model/main/ir/ir_station_list_mdl.dart';
 
 class IrCtrlApi extends HandleErrorsApi {
@@ -85,6 +86,34 @@ class IrCtrlApi extends HandleErrorsApi {
           response.statusCode == 403 ||
           response.statusCode == 409) {
         res = AddIrShopResMdl.failed(resDecode);
+      }
+      //TODO: Handle errors if not response not serialized
+    }
+    return res;
+  }
+
+  Future<IrShopListResMdl?> getIrOrgShopsApi({
+    required BuildContext context,
+    required bool showError,
+    required String orgId,
+  }) async {
+    super.context = context;
+    super.showError = showError;
+    IrShopListResMdl? res;
+    if (await checkInternetConnectivity()) {
+      var uri = IrApiUri.orgShops.uri;
+      uri = uri.replaceAll("<orgId>", orgId);
+      var response = await http.get(
+        Uri.parse(uri),
+        headers: {
+          'Authorization': 'Token $_token',
+        },
+      );
+      var json = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        res = IrShopListResMdl.success(json);
+      } else if (response.statusCode == 400 || response.statusCode == 403) {
+        res = IrShopListResMdl.failed(json);
       }
       //TODO: Handle errors if not response not serialized
     }

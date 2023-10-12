@@ -266,7 +266,7 @@ class _OrgEmpListOELSWidgetState extends State<OrgEmpListOELSWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (ctrl.orgEmpList != null) {
+    if (ctrl.orgEmpList != null && ctrl.orgEmpList!.orgId == ctrl.org!.id) {
       if (ctrl.orgEmpList!.emp.isNotEmpty) {
         return RefreshIndicator(
           onRefresh: () async => await getOrgEmpList(true),
@@ -280,7 +280,7 @@ class _OrgEmpListOELSWidgetState extends State<OrgEmpListOELSWidget> {
                   }
                   return null;
                 },
-                itemBuilder: (BuildContext context, int index) {
+                itemBuilder: (context, index) {
                   OrgEmpListSObjResMdl orgEmp =
                       ctrl.orgEmpList!.emp.elementAt(index);
                   return Card(

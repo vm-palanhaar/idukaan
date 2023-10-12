@@ -51,4 +51,19 @@ class IrCtrl extends IrCtrlMdl {
     );
     notifyListeners();
   }
+
+  Future<void> getIrOrgShopsApi({
+    required BuildContext context,
+    required String orgId,
+    required bool reload,
+  }) async {
+    if (irOrgShopList == null || irOrgShopList!.irShop.isEmpty || reload) {
+      irOrgShopList = await _api.getIrOrgShopsApi(
+        context: context,
+        showError: true,
+        orgId: orgId,
+      );
+      notifyListeners();
+    }
+  }
 }
