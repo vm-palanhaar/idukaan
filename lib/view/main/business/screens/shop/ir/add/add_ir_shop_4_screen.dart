@@ -9,7 +9,9 @@ import 'package:idukaan/view/widgets/buttons/elevated_button_widget.dart';
 import 'package:idukaan/view/widgets/fields/calendar_widget.dart';
 import 'package:idukaan/view/widgets/fields/pick_file_widget.dart';
 import 'package:idukaan/view/widgets/fields/textformfield_widget.dart';
+import 'package:idukaan/view/widgets/list_tile_error_widget.dart';
 import 'package:idukaan/view/widgets/text_error_widget.dart';
+import 'package:idukaan/view/widgets/text_widget.dart';
 import 'package:provider/provider.dart';
 
 class AddIrShop4Screen extends StatefulWidget {
@@ -72,11 +74,47 @@ class _AddIrShop4ScreenState extends State<AddIrShop4Screen> {
       showFetchShopLoc();
     }
 
+    setState(() {});
     if (count == total) {
       return true;
     }
-    setState(() {});
     return false;
+  }
+
+  void _successRes() {
+    Navigator.popUntil(context, ModalRoute.withName(OrgOptsScreen.id));
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 0.4,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              ListTile(
+                title: Center(
+                  child: TextWidget(
+                    text: ctrl.addIrShop.addIrShop1.getName,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                subtitle: Column(
+                  children: [
+                    Text('Stall No: ${ctrl.addIrShop.addIrShop1.getShopNo}'),
+                    Text(
+                      'Railway Station: ${ctrl.addIrShop.addIrShop3.getStation}',
+                    ),
+                  ],
+                ),
+              ),
+              ListTile(
+                title: Text(ctrl.addIrShopRes!.message),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -95,6 +133,14 @@ class _AddIrShop4ScreenState extends State<AddIrShop4Screen> {
             key: _irAddIrShop4Key,
             child: Column(
               children: <Widget>[
+                if (ctrl.addIrShopRes != null &&
+                    ctrl.addIrShopRes!.error != null)
+                  Card(
+                    child: ListTileErrorWidget(
+                      title: 'Attention Required',
+                      subtitle: ctrl.addIrShopRes!.error!.msg,
+                    ),
+                  ),
                 TextFormFieldWidget(
                   prefixIcon: AddIrShopFields.s4LicNo.icon,
                   labelText: AddIrShopFields.s4LicNo.title,
@@ -128,8 +174,14 @@ class _AddIrShop4ScreenState extends State<AddIrShop4Screen> {
                     if (_irAddIrShop4Key.currentState!.validate()) {
                       if (_validateFormAddIrShop4()) {
                         await ctrl.postIrShopApi(context: context);
-                        Navigator.popUntil(
-                            context, ModalRoute.withName(OrgOptsScreen.id));
+                        if (ctrl.addIrShopRes != null) {
+                          if (ctrl.addIrShopRes!.irShop != null) {
+                            _successRes();
+                          } else if (ctrl.addIrShopRes!.error != null) {
+                            setState(() {});
+                            //TODO: Manage multiple error codes
+                          }
+                        }
                       }
                     }
                   },
