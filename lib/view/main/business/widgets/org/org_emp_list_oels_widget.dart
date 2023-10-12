@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:idukaan/controller/main/business/business_ctrl.dart';
 import 'package:idukaan/model/main/business/emp/list/org_emp_list_sobj_res_mdl.dart';
-import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/ctext_error_widget.dart';
 import 'package:idukaan/view/widgets/fields/calendar_widget.dart';
 import 'package:idukaan/view/widgets/loading_widget.dart';
@@ -271,43 +270,40 @@ class _OrgEmpListOELSWidgetState extends State<OrgEmpListOELSWidget> {
       if (ctrl.orgEmpList!.emp.isNotEmpty) {
         return RefreshIndicator(
           onRefresh: () async => await getOrgEmpList(true),
-          child: Container(
-            margin: screenMargin(context),
-            child: CustomScrollView(
-              slivers: [
-                SliverList.separated(
-                  itemCount: ctrl.orgEmpList!.emp.length,
-                  separatorBuilder: (context, index) {
-                    if (index != ctrl.orgEmpList!.emp.length - 1) {
-                      return const Divider();
-                    }
-                    return null;
-                  },
-                  itemBuilder: (BuildContext context, int index) {
-                    OrgEmpListSObjResMdl orgEmp =
-                        ctrl.orgEmpList!.emp.elementAt(index);
-                    return Card(
-                      child: ListTile(
-                        title: Text(
-                          orgEmp.name,
-                          textDirection: TextDirection.ltr,
-                        ),
-                        trailing: orgEmp.isMng
-                            ? const Icon(Icons.manage_accounts_outlined)
-                            : null,
-                        onTap: () {
-                          ctrl.updateOrgEmp.setId(orgEmp.id);
-                          ctrl.updateOrgEmp.setIsMng(orgEmp.isMng);
-                          ctrl.updateOrgEmp.setJDate(orgEmp.jDate);
-                          _showModalBottomSheetOrgEmp(
-                              orgEmp: orgEmp, index: index);
-                        },
+          child: CustomScrollView(
+            slivers: [
+              SliverList.separated(
+                itemCount: ctrl.orgEmpList!.emp.length,
+                separatorBuilder: (context, index) {
+                  if (index != ctrl.orgEmpList!.emp.length - 1) {
+                    return const Divider();
+                  }
+                  return null;
+                },
+                itemBuilder: (BuildContext context, int index) {
+                  OrgEmpListSObjResMdl orgEmp =
+                      ctrl.orgEmpList!.emp.elementAt(index);
+                  return Card(
+                    child: ListTile(
+                      title: Text(
+                        orgEmp.name,
+                        textDirection: TextDirection.ltr,
                       ),
-                    );
-                  },
-                ),
-              ],
-            ),
+                      trailing: orgEmp.isMng
+                          ? const Icon(Icons.manage_accounts_outlined)
+                          : null,
+                      onTap: () {
+                        ctrl.updateOrgEmp.setId(orgEmp.id);
+                        ctrl.updateOrgEmp.setIsMng(orgEmp.isMng);
+                        ctrl.updateOrgEmp.setJDate(orgEmp.jDate);
+                        _showModalBottomSheetOrgEmp(
+                            orgEmp: orgEmp, index: index);
+                      },
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         );
       } else if (ctrl.orgEmpList!.error != null) {

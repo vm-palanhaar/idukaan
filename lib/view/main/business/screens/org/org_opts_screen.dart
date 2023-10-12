@@ -4,6 +4,7 @@ import 'package:idukaan/model/main/business/util/org_opts.dart';
 import 'package:idukaan/view/main/business/screens/org/emp/org_emp_list_screen.dart';
 import 'package:idukaan/view/main/business/screens/org/org_info_screen.dart';
 import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_init_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/list/ir_org_shop_list_screen.dart';
 import 'package:idukaan/view/util/app_bar.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/opt_widget.dart';
@@ -81,7 +82,7 @@ class _OrgOptsScreenState extends State<OrgOptsScreen> {
                     icon: OrgOptUtil.manageShops.icon,
                     title: OrgOptUtil.manageShops.name,
                     onTap: () {
-                      showOrgVerMsg(pageId: ',');
+                      showOrgVerMsg(pageId: IrOrgShopListScreen.id);
                     },
                   ),
                 if (ctrl.org!.isActive)
