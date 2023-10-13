@@ -11,6 +11,7 @@ import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_2_scr
 import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_3_screen.dart';
 import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_4_screen.dart';
 import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_init_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/ir_shop_opts_screen.dart';
 import 'package:idukaan/view/main/business/screens/shop/ir/list/ir_org_shop_list_screen.dart';
 import 'package:idukaan/view/main/dashboard/dashboard_screen.dart';
 import 'package:idukaan/view/main/profile/profile_screen.dart';
@@ -77,7 +78,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                 OrgInfoScreen.id: (_) => const OrgInfoScreen(),
                 // manage shop/stall(s)
                 IrOrgShopListScreen.id: (_) => const IrOrgShopListScreen(),
-
+                // ir shop
+                IrShopOptsScreen.id: (_) => const IrShopOptsScreen(),
               },
               home: Scaffold(
                 body: TabBarView(

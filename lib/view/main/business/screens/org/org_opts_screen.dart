@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:idukaan/controller/main/business/business_ctrl.dart';
-import 'package:idukaan/model/main/business/util/org_opts.dart';
+import 'package:idukaan/view/main/business/util/org/org_opts.dart';
 import 'package:idukaan/view/main/business/screens/org/emp/org_emp_list_screen.dart';
 import 'package:idukaan/view/main/business/screens/org/org_info_screen.dart';
 import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_init_screen.dart';
@@ -49,6 +49,7 @@ class _OrgOptsScreenState extends State<OrgOptsScreen> {
       showXDialog(
         title: 'Attention Required',
         text: ctrl.orgList!.isVerMsg,
+        //TODO: Add message field in org db for attention required
       );
     } else {
       Navigator.pushNamed(context, pageId);
