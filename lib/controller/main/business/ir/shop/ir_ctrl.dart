@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl_api.dart';
 import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/list/ir_shop_list_obj_res_mdl.dart';
 
 class IrCtrl extends IrCtrlMdl {
   final IrCtrlApi _api = IrCtrlApi();
@@ -65,5 +66,16 @@ class IrCtrl extends IrCtrlMdl {
       );
       notifyListeners();
     }
+  }
+
+  Future<void> patchIrShopOcApi({
+    required BuildContext context,
+    required IrShopListObjResMdl shop,
+  }) async {
+    updateIrShopRes = await _api.patchIrShopOcApi(
+      context: context,
+      showError: true,
+      reqShop: shop,
+    );
   }
 }

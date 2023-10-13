@@ -7,7 +7,9 @@ import 'package:idukaan/controller/handle_errors_api.dart';
 import 'package:idukaan/controller/rest_api.dart';
 import 'package:idukaan/model/main/business/shop/ir/add/add_ir_shop_req_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/add/add_ir_shop_res_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/list/ir_shop_list_obj_res_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/list/ir_shop_list_res_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/patch/update_ir_shop_res_mdl.dart';
 import 'package:idukaan/model/main/ir/ir_station_list_mdl.dart';
 
 class IrCtrlApi extends HandleErrorsApi {
@@ -114,6 +116,39 @@ class IrCtrlApi extends HandleErrorsApi {
         res = IrShopListResMdl.success(json);
       } else if (response.statusCode == 400 || response.statusCode == 403) {
         res = IrShopListResMdl.failed(json);
+      }
+      //TODO: Handle errors if not response not serialized
+    }
+    return res;
+  }
+
+  Future<UpdateIrShopResMdl?> patchIrShopOcApi({
+    required BuildContext context,
+    required bool showError,
+    required IrShopListObjResMdl reqShop,
+  }) async {
+    super.context = context;
+    super.showError = showError;
+    UpdateIrShopResMdl? res;
+    if (await checkInternetConnectivity()) {
+      var uri = IrApiUri.patchShop.uri;
+      uri = uri.replaceAll("<orgId>", reqShop.orgId);
+      uri = uri.replaceAll("<orgShopId>", reqShop.id);
+      var response = await http.patch(
+        Uri.parse(uri),
+        headers: {
+          'Authorization': 'Token $_token',
+        },
+        body: {
+          'id': reqShop.id,
+          'is_open': (!reqShop.isOpen).toString(),
+        },
+      );
+      var json = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        res = UpdateIrShopResMdl.success(json);
+      } else if (response.statusCode == 400 || response.statusCode == 403) {
+        res = UpdateIrShopResMdl.failed(json);
       }
       //TODO: Handle errors if not response not serialized
     }

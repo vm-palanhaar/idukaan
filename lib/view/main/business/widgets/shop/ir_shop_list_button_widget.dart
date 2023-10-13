@@ -30,6 +30,20 @@ class _IrShopListButtonWidgetState extends State<IrShopListButtonWidget> {
     super.initState();
   }
 
+  void showXDialog({
+    required String title,
+    required String content,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        icon: const Icon(Icons.error_outline, color: Colors.red),
+        title: Text(title),
+        content: Text(content),
+      ),
+    );
+  }
+
   Widget shopImgWidget() {
     return Container(
       height: MediaQuery.of(context).size.height * 0.18,
@@ -63,11 +77,24 @@ class _IrShopListButtonWidgetState extends State<IrShopListButtonWidget> {
     return Column(
       children: [
         OutlinedButton(
-          onPressed: () {
-            //TODO: Integrate open/close stall functionality
-            setState(() {
-              widget.irShop.isOpen = !widget.irShop.isOpen;
-            });
+          onPressed: () async {
+            await irCtrl.patchIrShopOcApi(
+              context: context,
+              shop: widget.irShop,
+            );
+            if (irCtrl.updateIrShopRes != null &&
+                irCtrl.updateIrShopRes!.shopId == widget.irShop.id) {
+              if (irCtrl.updateIrShopRes!.shop != null) {
+                setState(() {
+                  widget.irShop.isOpen = irCtrl.updateIrShopRes!.shop!.isOpen;
+                });
+              } else if (irCtrl.updateIrShopRes!.error != null) {
+                showXDialog(
+                  title: 'Action Failed',
+                  content: irCtrl.updateIrShopRes!.error!.msg,
+                );
+              }
+            }
           },
           style: ButtonStyle(
             side: MaterialStateProperty.all(
@@ -120,7 +147,7 @@ class _IrShopListButtonWidgetState extends State<IrShopListButtonWidget> {
                       ),
                     ],
                   ),
-                  if (widget.irShop.isActive)
+                  if (widget.irShop.empMng && widget.irShop.msg.isNotEmpty)
                     Container(
                       height: MediaQuery.of(context).size.height * 0.05,
                       color: Colors.yellow,

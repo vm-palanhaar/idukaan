@@ -11,6 +11,7 @@ class IrShopListObjResMdl {
   final bool isActive;
   final bool isVer;
   final bool empMng;
+  final String msg;
 
   String getPlt() {
     if (plt1.isNotEmpty && plt2.isNotEmpty) {
@@ -36,6 +37,7 @@ class IrShopListObjResMdl {
     required this.isActive,
     required this.isVer,
     required this.empMng,
+    required this.msg,
   });
 
   factory IrShopListObjResMdl.fromJson(Map<String, dynamic> json) {
@@ -52,6 +54,7 @@ class IrShopListObjResMdl {
       isActive: json["is_active"] as bool,
       isVer: json["is_verified"] as bool,
       empMng: json["emp_manager"] as bool,
+      msg: '', //TODO: add message field in irShop db for attention required
     );
   }
 }
