@@ -3,7 +3,6 @@ import 'package:idukaan/controller/main/business/business_ctrl.dart';
 import 'package:idukaan/view/main/business/screens/org/emp/add_org_emp_screen.dart';
 import 'package:idukaan/view/main/business/widgets/org/org_emp_list_oels_widget.dart';
 import 'package:idukaan/view/util/app_bar.dart';
-import 'package:idukaan/view/util/margins.dart';
 import 'package:provider/provider.dart';
 
 class OrgEmpListScreen extends StatelessWidget {
@@ -27,10 +26,7 @@ class OrgEmpListScreen extends StatelessWidget {
             ),
         ],
       ),
-      body: Container(
-        margin: screenMargin(context),
-        child: const OrgEmpListOELSWidget(),
-      ),
+      body: const OrgEmpListOELSWidget(),
     );
   }
 }

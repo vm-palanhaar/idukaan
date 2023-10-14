@@ -42,7 +42,7 @@ enum AddIrShopFields {
   s1StallImg(icon: Icons.image_outlined, title: 'Stall Image'),
   // screen 2
   s2Cash(icon: Icons.money_outlined, title: 'Cash'),
-  s2Upi(icon: Icons.numbers_outlined, title: 'UPI'),
+  s2Upi(icon: Icons.qr_code_outlined, title: 'UPI'),
   s2Card(icon: Icons.credit_card_outlined, title: 'Card'),
   // screen 3
   s3Station(icon: Icons.train_outlined, title: 'Railway Station'),

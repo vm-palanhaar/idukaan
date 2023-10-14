@@ -3,7 +3,7 @@ import 'package:idukaan/controller/main/business/business_ctrl.dart';
 import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl.dart';
 import 'package:idukaan/model/main/business/shop/ir/list/ir_shop_list_obj_res_mdl.dart';
 import 'package:idukaan/view/main/business/screens/shop/ir/ir_shop_opts_screen.dart';
-import 'package:idukaan/view/main/business/widgets/shop/ir_shop_list_button_widget.dart';
+import 'package:idukaan/view/main/business/widgets/shop/ir/ir_shop_list_button_widget.dart';
 import 'package:idukaan/view/widgets/ctext_error_widget.dart';
 import 'package:idukaan/view/widgets/loading_widget.dart';
 import 'package:provider/provider.dart';

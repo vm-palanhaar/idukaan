@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:idukaan/controller/main/business/business_ctrl.dart';
 import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/ir_shop_info_screen.dart';
 import 'package:idukaan/view/main/business/util/shop/ir/ir_shop_opts.dart';
 import 'package:idukaan/view/util/app_bar.dart';
 import 'package:idukaan/view/util/margins.dart';
@@ -101,7 +102,7 @@ class _IrShopOptsScreenState extends State<IrShopOptsScreen> {
                   icon: IrShopOptUtil.info.icon,
                   title: IrShopOptUtil.info.name,
                   onTap: () {
-                    showIrShopVerMsg(pageId: '');
+                    showIrShopVerMsg(pageId: IrShopInfoScreen.id);
                   },
                 ),
                 OptWidget(

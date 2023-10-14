@@ -77,5 +77,17 @@ class IrCtrl extends IrCtrlMdl {
       showError: true,
       reqShop: shop,
     );
+    notifyListeners();
+  }
+
+  Future<void> getIrShopInfoApi({
+    required BuildContext context,
+  }) async {
+    irShopInfo = await _api.getIrShopInfoApi(
+      context: context,
+      showError: true,
+      reqShop: irShop!,
+    );
+    notifyListeners();
   }
 }
