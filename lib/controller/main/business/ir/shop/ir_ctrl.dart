@@ -90,4 +90,15 @@ class IrCtrl extends IrCtrlMdl {
     );
     notifyListeners();
   }
+
+  Future<void> patchIrShopInfoApi({
+    required BuildContext context,
+  }) async {
+    updateIrShopRes = await _api.patchIrShopInfoApi(
+      context: context,
+      showError: true,
+      reqShop: updateIrShop,
+    );
+    notifyListeners();
+  }
 }

@@ -4,6 +4,7 @@ import 'package:idukaan/model/main/business/shop/ir/add/add_ir_shop_res_mdl.dart
 import 'package:idukaan/model/main/business/shop/ir/info/ir_shop_info_res_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/list/ir_shop_list_obj_res_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/list/ir_shop_list_res_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/patch/update_ir_shop_req_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/patch/update_ir_shop_res_mdl.dart';
 import 'package:idukaan/model/main/ir/ir_station_list_mdl.dart';
 
@@ -18,7 +19,9 @@ class IrCtrlMdl extends ChangeNotifier {
   // selected ir shop
   IrShopListObjResMdl? irShop;
   // patch ir shop
+  UpdateIrShopReqMdl updateIrShop = UpdateIrShopReqMdl();
   UpdateIrShopResMdl? updateIrShopRes;
   // ir shop info
+
   IrShopInfoResMdl? irShopInfo;
 }

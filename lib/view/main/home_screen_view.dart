@@ -14,6 +14,7 @@ import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_init_
 import 'package:idukaan/view/main/business/screens/shop/ir/ir_shop_info_screen.dart';
 import 'package:idukaan/view/main/business/screens/shop/ir/ir_shop_opts_screen.dart';
 import 'package:idukaan/view/main/business/screens/shop/ir/list/ir_org_shop_list_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/update_ir_shop_info_screen.dart';
 import 'package:idukaan/view/main/dashboard/dashboard_screen.dart';
 import 'package:idukaan/view/main/profile/profile_screen.dart';
 import 'package:idukaan/view/main/shop/shop_screen.dart';
@@ -82,6 +83,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                 // ir shop
                 IrShopOptsScreen.id: (_) => const IrShopOptsScreen(),
                 IrShopInfoScreen.id: (_) => const IrShopInfoScreen(),
+                UpdateIrShopInfoScreen.id: (_) =>
+                    const UpdateIrShopInfoScreen(),
               },
               home: Scaffold(
                 body: TabBarView(

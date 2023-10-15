@@ -3,7 +3,7 @@ class IrShopInfoObjResMdl {
   final String shopName;
   final String shopNo;
   final String shopImg;
-  final String contactNo;
+  String contactNo;
   final String station;
   final String plt1;
   final String plt2;

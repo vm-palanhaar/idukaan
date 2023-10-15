@@ -9,6 +9,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final Function onFieldSubmitted;
   final int? maxLines;
   final bool? obscureText;
+  final String? initialValue;
   const TextFormFieldWidget({
     super.key,
     required this.prefixIcon,
@@ -18,6 +19,7 @@ class TextFormFieldWidget extends StatelessWidget {
     this.maxLines,
     this.obscureText,
     this.validator,
+    this.initialValue,
   });
 
   @override
@@ -25,6 +27,7 @@ class TextFormFieldWidget extends StatelessWidget {
     return Container(
       margin: textFieldMargin(context),
       child: TextFormField(
+        initialValue: initialValue,
         obscureText: obscureText == null ? false : obscureText!,
         maxLines: maxLines == null ? 1 : maxLines!,
         keyboardType: keyboardType,

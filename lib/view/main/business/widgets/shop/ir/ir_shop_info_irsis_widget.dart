@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:idukaan/controller/main/business/business_ctrl.dart';
 import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/update_ir_shop_info_screen.dart';
 import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/ctext_error_widget.dart';
 import 'package:idukaan/view/widgets/loading_widget.dart';
@@ -21,11 +22,12 @@ class _IrShopInfoIRSISWidgetState extends State<IrShopInfoIRSISWidget> {
   @override
   void initState() {
     ctrl = Provider.of<BusinessCtrl>(context, listen: false).irCtrl;
-    getOrgInfo();
+    getIrShopInfo();
+
     super.initState();
   }
 
-  Future<void> getOrgInfo() async {
+  Future<void> getIrShopInfo() async {
     await ctrl.getIrShopInfoApi(
       context: context,
     );
@@ -106,6 +108,24 @@ class _IrShopInfoIRSISWidgetState extends State<IrShopInfoIRSISWidget> {
     );
   }
 
+  Widget shopEditWidget() {
+    return Card(
+      child: ListTile(
+        leading: const Icon(Icons.edit),
+        title: const Text('Update Stall Info'),
+        onTap: () {
+          ctrl.updateIrShop.orgId = ctrl.irShop!.orgId;
+          ctrl.updateIrShop.id = ctrl.irShop!.id;
+          ctrl.updateIrShop.setContactNo(ctrl.irShopInfo!.shop!.contactNo);
+          ctrl.updateIrShop.setIsCash(ctrl.irShopInfo!.shop!.isCash);
+          ctrl.updateIrShop.setIsUpi(ctrl.irShopInfo!.shop!.isUpi);
+          ctrl.updateIrShop.setIsCard(ctrl.irShopInfo!.shop!.isCard);
+          Navigator.pushNamed(context, UpdateIrShopInfoScreen.id);
+        },
+      ),
+    );
+  }
+
   Icon payment(bool paymentMethod) {
     if (paymentMethod) {
       return const Icon(
@@ -123,15 +143,19 @@ class _IrShopInfoIRSISWidgetState extends State<IrShopInfoIRSISWidget> {
   Widget build(BuildContext context) {
     if (ctrl.irShopInfo != null) {
       if (ctrl.irShopInfo!.shop != null) {
-        return SingleChildScrollView(
-          child: Container(
-            margin: screenMargin(context),
-            child: Column(
-              children: <Widget>[
-                shopImgWidget(),
-                shopBasicInfoWidget(),
-                shopPaymentWidget(),
-              ],
+        return RefreshIndicator(
+          onRefresh: () async => getIrShopInfo(),
+          child: SingleChildScrollView(
+            child: Container(
+              margin: screenMargin(context),
+              child: Column(
+                children: <Widget>[
+                  shopImgWidget(),
+                  shopBasicInfoWidget(),
+                  shopPaymentWidget(),
+                  shopEditWidget(),
+                ],
+              ),
             ),
           ),
         );
