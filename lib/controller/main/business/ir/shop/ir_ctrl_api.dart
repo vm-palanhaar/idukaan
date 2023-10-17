@@ -7,6 +7,10 @@ import 'package:idukaan/controller/handle_errors_api.dart';
 import 'package:idukaan/controller/rest_api.dart';
 import 'package:idukaan/model/main/business/shop/ir/add/add_ir_shop_req_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/add/add_ir_shop_res_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/emp/add/add_ir_org_shop_emp_list_res_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/emp/add/add_ir_shop_emp_req_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/emp/add/add_ir_shop_emp_res_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/emp/list/ir_shop_emp_list_res_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/info/ir_shop_info_res_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/list/ir_shop_list_obj_res_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/list/ir_shop_list_res_mdl.dart';
@@ -216,6 +220,103 @@ class IrCtrlApi extends HandleErrorsApi {
         res = UpdateIrShopResMdl.success(json);
       } else if (response.statusCode == 400 || response.statusCode == 403) {
         res = UpdateIrShopResMdl.failed(json);
+      }
+      //TODO: Handle errors if not response not serialized
+    }
+    return res;
+  }
+
+  Future<IrShopEmpListResMdl?> getIrShopEmpsApi({
+    required BuildContext context,
+    required bool showError,
+    required IrShopListObjResMdl reqShop,
+  }) async {
+    super.context = context;
+    super.showError = showError;
+    IrShopEmpListResMdl? res;
+    if (await checkInternetConnectivity()) {
+      var uri = IrApiUri.shopEmps.uri;
+      uri = uri.replaceAll("<orgId>", reqShop.orgId);
+      uri = uri.replaceAll("<orgShopId>", reqShop.id);
+      var response = await http.get(
+        Uri.parse(uri),
+        headers: {
+          'Authorization': 'Token $_token',
+          'Emp-List': 'irshop',
+        },
+      );
+      var json = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        res = IrShopEmpListResMdl.success(json);
+      } else if (response.statusCode == 400) {
+        res = IrShopEmpListResMdl.failed(json);
+      }
+      //TODO: Handle errors if not response not serialized
+    }
+    return res;
+  }
+
+  Future<AddIrOrgShopEmpListResMdl?> getIrOrgShopEmpsApi({
+    required BuildContext context,
+    required bool showError,
+    required IrShopListObjResMdl reqShop,
+  }) async {
+    super.context = context;
+    super.showError = showError;
+    AddIrOrgShopEmpListResMdl? res;
+    if (await checkInternetConnectivity()) {
+      var uri = IrApiUri.shopEmps.uri;
+      uri = uri.replaceAll("<orgId>", reqShop.orgId);
+      uri = uri.replaceAll("<orgShopId>", reqShop.id);
+      var response = await http.get(
+        Uri.parse(uri),
+        headers: {
+          'Authorization': 'Token $_token',
+          'Emp-List': 'org',
+        },
+      );
+      var json = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        res = AddIrOrgShopEmpListResMdl.success(json);
+      } else if (response.statusCode == 400 || response.statusCode == 409) {
+        res = AddIrOrgShopEmpListResMdl.failed(json);
+      }
+      //TODO: Handle errors if not response not serialized
+    }
+    return res;
+  }
+
+  Future<AddIrShopEmpResMdl?> postIrOrgShopEmpApi({
+    required BuildContext context,
+    required bool showError,
+    required AddIrShopEmpReqMdl reqEmp,
+  }) async {
+    super.context = context;
+    super.showError = showError;
+    AddIrShopEmpResMdl? res;
+    if (await checkInternetConnectivity()) {
+      var uri = IrApiUri.addShopEmp.uri;
+      uri = uri.replaceAll("<orgId>", reqEmp.orgId);
+      uri = uri.replaceAll("<orgShopId>", reqEmp.shopId);
+      var response = await http.post(
+        Uri.parse(uri),
+        headers: {
+          'Authorization': 'Token $_token',
+        },
+        body: {
+          "shop": reqEmp.shopId,
+          "org_emp": reqEmp.getOrgEmpId,
+          "join_date": reqEmp.getJDate,
+          "is_manager": reqEmp.getIsMng.toString(),
+        },
+      );
+      var json = jsonDecode(response.body);
+      if (response.statusCode == 201) {
+        res = AddIrShopEmpResMdl.success(json);
+      } else if (response.statusCode == 400 ||
+          response.statusCode == 403 ||
+          response.statusCode == 409) {
+        res = AddIrShopEmpResMdl.failed(json);
       }
       //TODO: Handle errors if not response not serialized
     }

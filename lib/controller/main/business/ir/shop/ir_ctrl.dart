@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl_api.dart';
 import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/emp/add/add_ir_shop_emp_req_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/emp/add/add_ir_shop_emp_res_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/list/ir_shop_list_obj_res_mdl.dart';
 
 class IrCtrl extends IrCtrlMdl {
@@ -100,5 +102,42 @@ class IrCtrl extends IrCtrlMdl {
       reqShop: updateIrShop,
     );
     notifyListeners();
+  }
+
+  Future<void> getIrShopEmpApi({
+    required BuildContext context,
+    required bool reload,
+  }) async {
+    irShopEmpList = await _api.getIrShopEmpsApi(
+      context: context,
+      showError: true,
+      reqShop: irShop!,
+    );
+    notifyListeners();
+  }
+
+  Future<void> getIrOrgShopEmpApi({
+    required BuildContext context,
+  }) async {
+    addIrOrgShopEmpList = null;
+    addIrOrgShopEmpList = await _api.getIrOrgShopEmpsApi(
+      context: context,
+      showError: true,
+      reqShop: irShop!,
+    );
+    notifyListeners();
+  }
+
+  Future<AddIrShopEmpResMdl?> postIrOrgShopEmpApi({
+    required BuildContext context,
+    required AddIrShopEmpReqMdl reqEmp,
+  }) async {
+    reqEmp.orgId = irShop!.orgId;
+    reqEmp.shopId = irShop!.id;
+    return await _api.postIrOrgShopEmpApi(
+      context: context,
+      showError: true,
+      reqEmp: reqEmp,
+    );
   }
 }

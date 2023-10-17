@@ -52,6 +52,8 @@ enum IrApiUri {
   orgShops(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop'),
   shopInfo(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<orgShopId>'),
   patchShop(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<orgShopId>'),
+  shopEmps(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<orgShopId>/emp'),
+  addShopEmp(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<orgShopId>/emp'),
   //DEV
   doNotUse(uri: '');
 
