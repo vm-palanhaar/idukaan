@@ -18,7 +18,7 @@ import 'package:idukaan/view/main/business/screens/shop/ir/ir_shop_opts_screen.d
 import 'package:idukaan/view/main/business/screens/shop/ir/list/ir_org_shop_list_screen.dart';
 import 'package:idukaan/view/main/business/screens/shop/ir/update_ir_shop_info_screen.dart';
 import 'package:idukaan/view/main/dashboard/dashboard_screen.dart';
-import 'package:idukaan/view/main/profile/profile_screen.dart';
+import 'package:idukaan/view/main/profile/screens/profile_screen.dart';
 import 'package:idukaan/view/main/shop/shop_screen.dart';
 import 'package:idukaan/view/main/util/bottom_nav_bar_util.dart';
 import 'package:provider/provider.dart';
