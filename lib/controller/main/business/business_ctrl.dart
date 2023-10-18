@@ -4,25 +4,28 @@ import 'package:idukaan/controller/auth/auth_ctrl.dart';
 import 'package:idukaan/controller/auth/auth_ctrl_mdl.dart';
 import 'package:idukaan/controller/main/business/business_ctrl_api.dart';
 import 'package:idukaan/controller/main/business/business_ctrl_mdl.dart';
+import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl.dart';
 import 'package:provider/provider.dart';
 
 class BusinessCtrl extends BusinessCtrlMdl {
   BuildContext context;
-  final BusinessCtrlApi _busApi = BusinessCtrlApi();
+  final BusinessCtrlApi _api = BusinessCtrlApi();
+  final IrCtrl irCtrl = IrCtrl();
 
   BusinessCtrl({required this.context}) {
     String? token = Provider.of<AuthCtrl>(
       context,
       listen: false,
     ).appKeys[AppKey.token.key]!;
-    _busApi.setToken(token);
+    _api.setToken(token);
+    irCtrl.setTokenIrShopCtrl(token: token);
   }
 
   Future<void> getOrgTypesApi({
     required BuildContext context,
   }) async {
     if (orgTypeList.isEmpty) {
-      orgTypeList = await _busApi.getOrgTypesApi(
+      orgTypeList = await _api.getOrgTypesApi(
         context: context,
         showError: false,
       );
@@ -35,7 +38,7 @@ class BusinessCtrl extends BusinessCtrlMdl {
   Future<void> postOrgApi({
     required BuildContext context,
   }) async {
-    addOrgRes = await _busApi.postOrgApi(
+    addOrgRes = await _api.postOrgApi(
       context: context,
       showError: true,
       addOrg: addOrg,
@@ -50,7 +53,7 @@ class BusinessCtrl extends BusinessCtrlMdl {
   }) async {
     if (orgList == null || orgList!.org.isEmpty || reload) {
       orgList = null;
-      orgList = await _busApi.getOrgListApi(
+      orgList = await _api.getOrgListApi(
         context: context,
         showError: true,
       );
@@ -61,7 +64,7 @@ class BusinessCtrl extends BusinessCtrlMdl {
   Future<void> getOrgInfoApi({
     required BuildContext context,
   }) async {
-    orgInfo = await _busApi.getOrgInfoApi(
+    orgInfo = await _api.getOrgInfoApi(
       context: context,
       showError: true,
       orgId: org!.id,
@@ -73,7 +76,7 @@ class BusinessCtrl extends BusinessCtrlMdl {
     required BuildContext context,
   }) async {
     addOrgEmp.setOrg(org!.id);
-    addOrgEmpRes = await _busApi.postOrgEmpApi(
+    addOrgEmpRes = await _api.postOrgEmpApi(
       context: context,
       addOrgEmp: addOrgEmp,
       showError: true,
@@ -88,7 +91,7 @@ class BusinessCtrl extends BusinessCtrlMdl {
   }) async {
     if (orgEmpList == null || orgEmpList!.emp.isEmpty || reload) {
       orgEmpList = null;
-      orgEmpList = await _busApi.getOrgEmpListApi(
+      orgEmpList = await _api.getOrgEmpListApi(
         context: context,
         showError: true,
         orgId: org!.id,
@@ -101,7 +104,7 @@ class BusinessCtrl extends BusinessCtrlMdl {
     required BuildContext context,
   }) async {
     updateOrgEmp.setOrg(org!.id);
-    updateOrgEmpRes = await _busApi.patchOrgEmpApi(
+    updateOrgEmpRes = await _api.patchOrgEmpApi(
       context: context,
       showError: true,
       updateEmp: updateOrgEmp,
@@ -114,7 +117,7 @@ class BusinessCtrl extends BusinessCtrlMdl {
     required BuildContext context,
     required String empId,
   }) async {
-    deleteOrgEmpRes = await _busApi.deleteOrgEmpApi(
+    deleteOrgEmpRes = await _api.deleteOrgEmpApi(
       context: context,
       showError: true,
       orgId: org!.id,

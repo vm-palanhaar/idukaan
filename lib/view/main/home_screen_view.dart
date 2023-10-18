@@ -6,6 +6,17 @@ import 'package:idukaan/view/main/business/screens/org/emp/org_emp_list_screen.d
 import 'package:idukaan/view/main/business/screens/org/org_info_screen.dart';
 import 'package:idukaan/view/main/business/screens/org/org_list_screen.dart';
 import 'package:idukaan/view/main/business/screens/org/org_opts_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_1_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_2_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_3_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_4_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/add/add_ir_shop_init_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/emp/add_ir_shop_emp_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/emp/ir_shop_emp_list_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/ir_shop_info_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/ir_shop_opts_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/list/ir_org_shop_list_screen.dart';
+import 'package:idukaan/view/main/business/screens/shop/ir/update_ir_shop_info_screen.dart';
 import 'package:idukaan/view/main/dashboard/dashboard_screen.dart';
 import 'package:idukaan/view/main/profile/profile_screen.dart';
 import 'package:idukaan/view/main/shop/shop_screen.dart';
@@ -59,9 +70,25 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                 OrgListScreen.id: (_) => const OrgListScreen(),
                 AddOrgScreen.id: (_) => const AddOrgScreen(),
                 OrgOptsScreen.id: (_) => const OrgOptsScreen(),
+                // add ir shop
+                AddIrShopInitScreen.id: (_) => const AddIrShopInitScreen(),
+                AddIrShop1Screen.id: (_) => const AddIrShop1Screen(),
+                AddIrShop2Screen.id: (_) => const AddIrShop2Screen(),
+                AddIrShop3Screen.id: (_) => const AddIrShop3Screen(),
+                AddIrShop4Screen.id: (_) => const AddIrShop4Screen(),
+                // org emp
                 OrgEmpListScreen.id: (_) => const OrgEmpListScreen(),
                 AddOrgEmpScreen.id: (_) => const AddOrgEmpScreen(),
                 OrgInfoScreen.id: (_) => const OrgInfoScreen(),
+                // manage shop/stall(s)
+                IrOrgShopListScreen.id: (_) => const IrOrgShopListScreen(),
+                // ir shop
+                IrShopOptsScreen.id: (_) => const IrShopOptsScreen(),
+                IrShopInfoScreen.id: (_) => const IrShopInfoScreen(),
+                IrShopEmpListScreen.id: (_) => const IrShopEmpListScreen(),
+                AddIrShopEmpScreen.id: (_) => const AddIrShopEmpScreen(),
+                UpdateIrShopInfoScreen.id: (_) =>
+                    const UpdateIrShopInfoScreen(),
               },
               home: Scaffold(
                 body: TabBarView(
