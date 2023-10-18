@@ -50,10 +50,14 @@ enum IrApiUri {
   stations(uri: '$baseUrlApiIrV1/stations'),
   addShop(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop'),
   orgShops(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop'),
-  shopInfo(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<orgShopId>'),
-  patchShop(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<orgShopId>'),
-  shopEmps(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<orgShopId>/emp'),
-  addShopEmp(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<orgShopId>/emp'),
+  shopInfo(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<shopId>'),
+  patchShop(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<shopId>'),
+  shopEmps(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<shopId>/emp'),
+  addShopEmp(uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<shopId>/emp'),
+  patchShopEmp(
+      uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<shopId>/emp/<empId>'),
+  deleteShopEmp(
+      uri: '$baseUrlApiIrAppV1/org/<orgId>/shop/<shopId>/emp/<empId>'),
   //DEV
   doNotUse(uri: '');
 

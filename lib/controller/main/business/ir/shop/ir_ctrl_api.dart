@@ -10,7 +10,10 @@ import 'package:idukaan/model/main/business/shop/ir/add/add_ir_shop_res_mdl.dart
 import 'package:idukaan/model/main/business/shop/ir/emp/add/add_ir_org_shop_emp_list_res_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/emp/add/add_ir_shop_emp_req_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/emp/add/add_ir_shop_emp_res_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/emp/delete/delete_ir_shop_emp_res_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/emp/list/ir_shop_emp_list_res_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/emp/patch/update_ir_shop_emp_req_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/emp/patch/update_ir_shop_emp_res_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/info/ir_shop_info_res_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/list/ir_shop_list_obj_res_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/list/ir_shop_list_res_mdl.dart';
@@ -172,7 +175,7 @@ class IrCtrlApi extends HandleErrorsApi {
     if (await checkInternetConnectivity()) {
       var uri = IrApiUri.shopInfo.uri;
       uri = uri.replaceAll("<orgId>", reqShop.orgId);
-      uri = uri.replaceAll("<orgShopId>", reqShop.id);
+      uri = uri.replaceAll("<shopId>", reqShop.id);
       var response = await http.get(
         Uri.parse(uri),
         headers: {
@@ -201,7 +204,7 @@ class IrCtrlApi extends HandleErrorsApi {
     if (await checkInternetConnectivity()) {
       var uri = IrApiUri.patchShop.uri;
       uri = uri.replaceAll("<orgId>", reqShop.orgId);
-      uri = uri.replaceAll("<orgShopId>", reqShop.id);
+      uri = uri.replaceAll("<shopId>", reqShop.id);
       var response = await http.patch(
         Uri.parse(uri),
         headers: {
@@ -237,7 +240,7 @@ class IrCtrlApi extends HandleErrorsApi {
     if (await checkInternetConnectivity()) {
       var uri = IrApiUri.shopEmps.uri;
       uri = uri.replaceAll("<orgId>", reqShop.orgId);
-      uri = uri.replaceAll("<orgShopId>", reqShop.id);
+      uri = uri.replaceAll("<shopId>", reqShop.id);
       var response = await http.get(
         Uri.parse(uri),
         headers: {
@@ -267,7 +270,7 @@ class IrCtrlApi extends HandleErrorsApi {
     if (await checkInternetConnectivity()) {
       var uri = IrApiUri.shopEmps.uri;
       uri = uri.replaceAll("<orgId>", reqShop.orgId);
-      uri = uri.replaceAll("<orgShopId>", reqShop.id);
+      uri = uri.replaceAll("<shopId>", reqShop.id);
       var response = await http.get(
         Uri.parse(uri),
         headers: {
@@ -297,7 +300,7 @@ class IrCtrlApi extends HandleErrorsApi {
     if (await checkInternetConnectivity()) {
       var uri = IrApiUri.addShopEmp.uri;
       uri = uri.replaceAll("<orgId>", reqEmp.orgId);
-      uri = uri.replaceAll("<orgShopId>", reqEmp.shopId);
+      uri = uri.replaceAll("<shopId>", reqEmp.shopId);
       var response = await http.post(
         Uri.parse(uri),
         headers: {
@@ -317,6 +320,76 @@ class IrCtrlApi extends HandleErrorsApi {
           response.statusCode == 403 ||
           response.statusCode == 409) {
         res = AddIrShopEmpResMdl.failed(json);
+      }
+      //TODO: Handle errors if not response not serialized
+    }
+    return res;
+  }
+
+  Future<UpdateIrShopEmpResMdl?> patchIrShopEmpApi({
+    required BuildContext context,
+    required bool showError,
+    required UpdateIrShopEmpReqMdl reqEmp,
+  }) async {
+    super.context = context;
+    super.showError = showError;
+    UpdateIrShopEmpResMdl? res;
+    if (await checkInternetConnectivity()) {
+      var uri = IrApiUri.patchShopEmp.uri;
+      uri = uri.replaceAll("<orgId>", reqEmp.orgId);
+      uri = uri.replaceAll("<shopId>", reqEmp.shopId);
+      uri = uri.replaceAll("<empId>", reqEmp.getId);
+      var response = await http.patch(
+        Uri.parse(uri),
+        headers: {
+          'Authorization': 'Token $_token',
+        },
+        body: {
+          "id": reqEmp.getId,
+          "join_date": reqEmp.getJDate,
+          "is_manager": reqEmp.getIsMng.toString(),
+        },
+      );
+      var json = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        res = UpdateIrShopEmpResMdl.success(json);
+      } else if (response.statusCode == 400 || response.statusCode == 403) {
+        res = UpdateIrShopEmpResMdl.failed(json);
+      }
+      //TODO: Handle errors if not response not serialized
+    }
+    return res;
+  }
+
+  Future<DeleteIrShopEmpResMdl?> deleteIrShopEmpApi({
+    required BuildContext context,
+    required bool showError,
+    required String empId,
+    required IrShopListObjResMdl reqShop,
+  }) async {
+    super.context = context;
+    super.showError = showError;
+    DeleteIrShopEmpResMdl? res;
+    if (await checkInternetConnectivity()) {
+      var uri = IrApiUri.deleteShopEmp.uri;
+      uri = uri.replaceAll("<orgId>", reqShop.orgId);
+      uri = uri.replaceAll("<shopId>", reqShop.id);
+      uri = uri.replaceAll("<empId>", empId);
+      var response = await http.delete(
+        Uri.parse(uri),
+        body: {
+          'id': empId,
+        },
+        headers: {
+          'Authorization': 'Token $_token',
+        },
+      );
+      var resDecode = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        res = DeleteIrShopEmpResMdl.success(resDecode);
+      }
+      if (response.statusCode == 400 || response.statusCode == 403) {
+        res = DeleteIrShopEmpResMdl.failed(resDecode);
       }
       //TODO: Handle errors if not response not serialized
     }

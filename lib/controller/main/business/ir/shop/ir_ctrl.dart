@@ -4,6 +4,9 @@ import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl_api.dart';
 import 'package:idukaan/controller/main/business/ir/shop/ir_ctrl_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/emp/add/add_ir_shop_emp_req_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/emp/add/add_ir_shop_emp_res_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/emp/delete/delete_ir_shop_emp_res_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/emp/patch/update_ir_shop_emp_req_mdl.dart';
+import 'package:idukaan/model/main/business/shop/ir/emp/patch/update_ir_shop_emp_res_mdl.dart';
 import 'package:idukaan/model/main/business/shop/ir/list/ir_shop_list_obj_res_mdl.dart';
 
 class IrCtrl extends IrCtrlMdl {
@@ -138,6 +141,31 @@ class IrCtrl extends IrCtrlMdl {
       context: context,
       showError: true,
       reqEmp: reqEmp,
+    );
+  }
+
+  Future<UpdateIrShopEmpResMdl?> patchIrShopEmpApi({
+    required BuildContext context,
+    required UpdateIrShopEmpReqMdl reqEmp,
+  }) async {
+    reqEmp.orgId = irShop!.orgId;
+    reqEmp.shopId = irShop!.id;
+    return await _api.patchIrShopEmpApi(
+      context: context,
+      showError: true,
+      reqEmp: reqEmp,
+    );
+  }
+
+  Future<DeleteIrShopEmpResMdl?> deleteIrShopEmpApi({
+    required BuildContext context,
+    required String empId,
+  }) async {
+    return await _api.deleteIrShopEmpApi(
+      context: context,
+      showError: true,
+      empId: empId,
+      reqShop: irShop!,
     );
   }
 }

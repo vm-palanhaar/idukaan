@@ -191,7 +191,7 @@ class _OrgEmpListOELSWidgetState extends State<OrgEmpListOELSWidget> {
                                 index: index,
                               );
                             },
-                            child: const Text('Update'),
+                            child: const Text('Terminate'),
                           ),
                           TextButton(
                             onPressed: () {
