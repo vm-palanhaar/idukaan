@@ -142,7 +142,7 @@ class IrCtrlApi extends HandleErrorsApi {
     if (await checkInternetConnectivity()) {
       var uri = IrApiUri.patchShop.uri;
       uri = uri.replaceAll("<orgId>", reqShop.orgId);
-      uri = uri.replaceAll("<orgShopId>", reqShop.id);
+      uri = uri.replaceAll("<shopId>", reqShop.id);
       var response = await http.patch(
         Uri.parse(uri),
         headers: {
