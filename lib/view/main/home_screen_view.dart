@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:idukaan/controller/main/business/business_ctrl.dart';
+import 'package:idukaan/controller/main/profile/profile_ctrl.dart';
 import 'package:idukaan/view/main/business/screens/org/add_org_screen.dart';
 import 'package:idukaan/view/main/business/screens/org/emp/add_org_emp_screen.dart';
 import 'package:idukaan/view/main/business/screens/org/emp/org_emp_list_screen.dart';
@@ -18,6 +19,7 @@ import 'package:idukaan/view/main/business/screens/shop/ir/ir_shop_opts_screen.d
 import 'package:idukaan/view/main/business/screens/shop/ir/list/ir_org_shop_list_screen.dart';
 import 'package:idukaan/view/main/business/screens/shop/ir/update_ir_shop_info_screen.dart';
 import 'package:idukaan/view/main/dashboard/dashboard_screen.dart';
+import 'package:idukaan/view/main/profile/screens/profile/profile_info_screen.dart';
 import 'package:idukaan/view/main/profile/screens/profile_screen.dart';
 import 'package:idukaan/view/main/shop/shop_screen.dart';
 import 'package:idukaan/view/main/util/bottom_nav_bar_util.dart';
@@ -38,11 +40,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => BusinessCtrl(
-            context: context,
-          ),
-        ),
+        ChangeNotifierProvider(create: (_) => BusinessCtrl(context: context)),
+        ChangeNotifierProvider(create: (_) => ProfileCtrl(context: context)),
       ],
       child: DefaultTabController(
         length: 4,
@@ -67,6 +66,9 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                 useMaterial3: true,
               ),
               routes: {
+                /*
+                Bottom Navigation Bar - Business
+                 */
                 OrgListScreen.id: (_) => const OrgListScreen(),
                 AddOrgScreen.id: (_) => const AddOrgScreen(),
                 OrgOptsScreen.id: (_) => const OrgOptsScreen(),
@@ -89,6 +91,11 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                 AddIrShopEmpScreen.id: (_) => const AddIrShopEmpScreen(),
                 UpdateIrShopInfoScreen.id: (_) =>
                     const UpdateIrShopInfoScreen(),
+
+                /*
+                Bottom Navigation Bar - Profile
+                 */
+                ProfileInfoScreen.id: (_) => const ProfileInfoScreen(),
               },
               home: Scaffold(
                 body: TabBarView(

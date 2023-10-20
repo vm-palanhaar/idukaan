@@ -6,6 +6,7 @@ enum UserApiUri {
   signup(uri: '$baseUrlApi/user/v1/signup'),
   login(uri: '$baseUrlApi/user/v1/login'),
   validate(uri: '$baseUrlApi/user/v1/validate'),
+  profile(uri: '$baseUrlApi/user/v1/profile'),
   logout(uri: '$baseUrlApi/user/v1/logout'),
   logoutAll(uri: '$baseUrlApi/user/v1/logoutAll'),
   //DEV

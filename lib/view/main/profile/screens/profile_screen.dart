@@ -3,6 +3,8 @@ import 'package:idukaan/view/main/profile/util/profile_util.dart';
 import 'package:idukaan/view/util/app_bar.dart';
 import 'package:idukaan/view/util/margins.dart';
 
+import 'profile/profile_info_screen.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -22,7 +24,9 @@ class ProfileScreen extends StatelessWidget {
                 child: ListTile(
                   leading: Icon(ProfileOptUtil.profile.icon),
                   title: Text(ProfileOptUtil.profile.name),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, ProfileInfoScreen.id);
+                  },
                 ),
               ),
               const Divider(),
