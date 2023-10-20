@@ -19,6 +19,9 @@ class InitView extends StatelessWidget {
       create: (_) => UserCtrl(),
       child: MaterialApp(
         title: 'Initiating iDukaan',
+        theme: ThemeData(
+          useMaterial3: true,
+        ),
         initialRoute: InitScreen.id,
         routes: {
           InitScreen.id: (_) => const InitScreen(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:idukaan/controller/auth/auth_ctrl_api.dart';
 import 'package:idukaan/controller/auth/auth_ctrl_mdl.dart';
+import 'package:idukaan/view/init/init_view.dart';
 
 class AuthCtrl extends AuthCtrlMdl {
   final AuthCtrlApi _authApi = AuthCtrlApi();
@@ -26,7 +27,6 @@ class AuthCtrl extends AuthCtrlMdl {
         aOptions: getAndroidOptions(),
       );
     }
-    readAllKeys();
     userLoggedIn = false;
   }
 
@@ -88,5 +88,12 @@ class AuthCtrl extends AuthCtrlMdl {
       userLoggedInRes = null;
       userLoggedIn = true;
     }
+  }
+
+  Future<void> postUserLogout({
+    required BuildContext context,
+  }) async {
+    deleteAllKeys();
+    Navigator.pushNamedAndRemoveUntil(context, InitView.id, (route) => false);
   }
 }

@@ -26,4 +26,10 @@ class ProfileCtrl extends ProfileCtrlMdl {
       context: context,
     );
   }
+
+  Future<void> postLogoutApi({
+    required BuildContext context,
+  }) async {
+    await _api.postLogoutApi(context: context);
+  }
 }

@@ -31,4 +31,23 @@ class ProfileCtrlApi extends HandleErrorsApi {
     }
     return res;
   }
+
+  Future<void> postLogoutApi({
+    required BuildContext context,
+  }) async {
+    super.context = context;
+    super.showError = true;
+    if (await checkInternetConnectivity()) {
+      var response = await http.post(
+        Uri.parse(UserApiUri.logout.uri),
+        headers: {
+          'Authorization': 'Token $_token',
+        },
+      );
+      if (response.statusCode == 204) {
+        await userLogout(isError: false);
+      }
+      //TODO: Handle errors
+    }
+  }
 }

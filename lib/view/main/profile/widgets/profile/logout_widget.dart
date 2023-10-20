@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:idukaan/controller/main/profile/profile_ctrl.dart';
-import 'package:idukaan/view/init/init_view.dart';
 import 'package:idukaan/view/main/profile/util/profile_util.dart';
-import 'package:idukaan/view/util/margins.dart';
 import 'package:idukaan/view/widgets/list_tile_row_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +20,10 @@ class _LogoutWidgetState extends State<LogoutWidget> {
     super.initState();
   }
 
+  Future<void> userLogout() async {
+    await ctrl.postLogoutApi(context: context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListTileRowWidget(
@@ -38,14 +40,9 @@ class _LogoutWidgetState extends State<LogoutWidget> {
               ),
               actions: [
                 TextButton(
-                  onPressed: () {
+                  onPressed: () async {
                     Navigator.pop(context);
-                    //TODO: API integration
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      InitView.id,
-                      (route) => false,
-                    );
+                    await userLogout();
                   },
                   child: const Text('Logout'),
                 ),
