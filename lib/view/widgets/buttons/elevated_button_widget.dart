@@ -4,17 +4,19 @@ import 'package:idukaan/view/widgets/text_widget.dart';
 
 class ElevatedButtonWidget extends StatelessWidget {
   final String title;
+  final bool? margin;
   final Function onPressed;
   const ElevatedButtonWidget({
     super.key,
     required this.title,
     required this.onPressed,
+    this.margin,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: buttonMargin(context),
+      margin: margin == null ? buttonMargin(context) : null,
       child: ElevatedButton(
         onPressed: () => onPressed(),
         style: ElevatedButton.styleFrom(
@@ -30,8 +32,7 @@ class ElevatedButtonWidget extends StatelessWidget {
         ),
         child: TextWidget(
           text: title,
-          fontWeight: FontWeight.bold,
-          fontSize: MediaQuery.of(context).size.height * 0.027,
+          fontSize: MediaQuery.of(context).size.height * 0.021,
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:idukaan/controller/main/business/business_ctrl.dart';
 import 'package:idukaan/controller/main/profile/profile_ctrl.dart';
+import 'package:idukaan/view/init/init_view.dart';
 import 'package:idukaan/view/main/business/screens/org/add_org_screen.dart';
 import 'package:idukaan/view/main/business/screens/org/emp/add_org_emp_screen.dart';
 import 'package:idukaan/view/main/business/screens/org/emp/org_emp_list_screen.dart';
@@ -96,6 +97,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                 Bottom Navigation Bar - Profile
                  */
                 ProfileInfoScreen.id: (_) => const ProfileInfoScreen(),
+                InitView.id: (_) => const InitView(),
               },
               home: Scaffold(
                 body: TabBarView(
