@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:idukaan/controller/auth/auth_ctrl.dart';
+import 'package:idukaan/view/main/util/internet_screen.dart';
 import 'package:provider/provider.dart';
 
 class HandleErrorsApi {
@@ -24,7 +25,7 @@ class HandleErrorsApi {
     final connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
       if (showError) {
-        //TODO: Design no internet screen and push to that screen
+        Navigator.pushNamed(context!, InternetScreen.id);
       }
       return false;
     }

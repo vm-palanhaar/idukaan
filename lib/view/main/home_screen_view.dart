@@ -24,6 +24,7 @@ import 'package:idukaan/view/main/profile/screens/profile/profile_info_screen.da
 import 'package:idukaan/view/main/profile/screens/profile_screen.dart';
 import 'package:idukaan/view/main/shop/shop_screen.dart';
 import 'package:idukaan/view/main/util/bottom_nav_bar_util.dart';
+import 'package:idukaan/view/main/util/internet_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreenView extends StatefulWidget {
@@ -77,6 +78,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
            */
           ProfileInfoScreen.id: (_) => const ProfileInfoScreen(),
           InitView.id: (_) => const InitView(),
+          InternetScreen.id: (_) => const InternetScreen(),
         },
         home: DefaultTabController(
           length: 4,
