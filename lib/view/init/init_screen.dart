@@ -7,7 +7,7 @@ import 'package:idukaan/view/widgets/text_widget.dart';
 
 class InitScreen extends StatelessWidget {
   const InitScreen({super.key});
-  static String id = '/idukaan/init';
+  static String id = '/idukaan/user/init';
 
   @override
   Widget build(BuildContext context) {

@@ -25,9 +25,10 @@ class ProfileCtrlApi extends HandleErrorsApi {
       );
       var resDecode = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        res = ProfileInfoResMdl.fromJson(resDecode["user"]);
+        res = ProfileInfoResMdl.fromJson(resDecode['user']);
+      } else {
+        handleErrors(statusCode: response.statusCode);
       }
-      //TODO: Handle errors if not response not serialized
     }
     return res;
   }
@@ -46,8 +47,9 @@ class ProfileCtrlApi extends HandleErrorsApi {
       );
       if (response.statusCode == 204) {
         await userLogout(isError: false);
+      } else {
+        handleErrors(statusCode: response.statusCode);
       }
-      //TODO: Handle errors
     }
   }
 }

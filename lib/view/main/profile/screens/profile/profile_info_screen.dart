@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:idukaan/view/main/profile/widgets/profile/profile_info_widget.dart';
 import 'package:idukaan/view/util/app_bar.dart';
-import 'package:idukaan/view/util/margins.dart';
 
 class ProfileInfoScreen extends StatelessWidget {
   const ProfileInfoScreen({super.key});

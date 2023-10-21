@@ -18,14 +18,16 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
 
   @override
   void initState() {
-    ctrl = Provider.of<ProfileCtrl>(context, listen: false);
     super.initState();
+    ctrl = Provider.of<ProfileCtrl>(context, listen: false);
     getProfileInfo();
   }
 
   Future<void> getProfileInfo() async {
     res = await ctrl.getProfileInfoApi(context: context);
-    setState(() {});
+    if (res != null) {
+      setState(() {});
+    }
   }
 
   @override

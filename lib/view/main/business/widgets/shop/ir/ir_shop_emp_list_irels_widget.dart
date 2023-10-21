@@ -143,6 +143,7 @@ class _IrShopEmpListIRELSWidgetState extends State<IrShopEmpListIRELSWidget> {
                   onTap: (String date) async {},
                   lastDate: DateTime.now(),
                 ),
+              if (ctrl.irShop!.empMng) const Divider(),
               if (ctrl.irShop!.empMng)
                 ListTile(
                   leading: const Icon(Icons.person_remove_outlined),

@@ -31,5 +31,3 @@ class IDukaan extends StatelessWidget {
     );
   }
 }
-
-

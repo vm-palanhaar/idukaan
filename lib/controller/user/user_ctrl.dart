@@ -38,14 +38,6 @@ class UserCtrl extends UserCtrlMdl {
       if (userLoginRes!.token.isNotEmpty && userLoginRes!.userSObj != null) {
         AuthCtrl ctrl = Provider.of<AuthCtrl>(context!, listen: false);
         await ctrl.writeKey(
-          key: AppKey.firstName.key,
-          value: userLoginRes!.userSObj!.firstName,
-        );
-        await ctrl.writeKey(
-          key: AppKey.lastName.key,
-          value: userLoginRes!.userSObj!.lastName,
-        );
-        await ctrl.writeKey(
           key: AppKey.username.key,
           value: userLoginRes!.userSObj!.username,
         );
