@@ -54,7 +54,7 @@ class IrShopListObjResMdl {
       isActive: json["is_active"] as bool,
       isVer: json["is_verified"] as bool,
       empMng: json["emp_manager"] as bool,
-      msg: '', //TODO: add message field in irShop db for attention required
+      msg: json["msg"] ?? '',
     );
   }
 }

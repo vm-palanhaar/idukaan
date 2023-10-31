@@ -40,7 +40,7 @@ class _AddOrgScreenState extends State<AddOrgScreen> {
   }
 
   bool _validateFormAddOrg() {
-    if (ctrl.addOrg.getDoc.isEmpty) {
+    if (ctrl.addOrg.getType.isDoc && ctrl.addOrg.getDoc.isEmpty) {
       setState(() {
         _errorIsDoc = true;
       });
@@ -132,18 +132,20 @@ class _AddOrgScreenState extends State<AddOrgScreen> {
                     title: const Text('Document'),
                     subtitle: Text(ctrl.addOrg.getType.docType),
                   ),
-                TextFormFieldWidget(
-                  prefixIcon: Icons.confirmation_num_outlined,
-                  keyboardType: TextInputType.name,
-                  labelText: 'Registration Number',
-                  onFieldSubmitted: ctrl.addOrg.setRegNo,
-                ),
+                if (ctrl.orgTypeList.isNotEmpty)
+                  TextFormFieldWidget(
+                    prefixIcon: Icons.confirmation_num_outlined,
+                    keyboardType: TextInputType.name,
+                    labelText: ctrl.addOrg.getType.docNo,
+                    onFieldSubmitted: ctrl.addOrg.setRegNo,
+                  ),
                 if (_errorIsDoc) const TextErrorWidget(text: 'Document !'),
-                PickFileWidget(
-                  icon: Icons.file_present_outlined,
-                  labelText: 'Document (.pdf)',
-                  onPressed: ctrl.addOrg.setDoc,
-                ),
+                if (ctrl.orgTypeList.isNotEmpty && ctrl.addOrg.getType.isDoc)
+                  PickFileWidget(
+                    icon: Icons.file_present_outlined,
+                    labelText: 'Document (.pdf)',
+                    onPressed: ctrl.addOrg.setDoc,
+                  ),
                 ElevatedButtonWidget(
                   title: 'Submit',
                   onPressed: () async {
