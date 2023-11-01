@@ -94,12 +94,11 @@ class _OrgOptsScreenState extends State<OrgOptsScreen> {
                       showOrgVerMsg(pageId: OrgEmpListScreen.id);
                     },
                   ),
-                if (ctrl.org!.isActive)
                   OptWidget(
                     icon: OrgOptUtil.legal.icon,
                     title: OrgOptUtil.legal.name,
                     onTap: () {
-                      showOrgVerMsg(pageId: ',');
+                      Navigator.pushNamed(context, OrgInfoScreen.id);
                     },
                   ),
                 OptWidget(

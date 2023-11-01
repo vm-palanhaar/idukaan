@@ -65,14 +65,17 @@ class BusinessCtrlApi extends HandleErrorsApi {
 
       request.fields['type'] = addOrg.getType.id;
       request.fields['name'] = addOrg.getName;
-      request.files.add(
-        await http.MultipartFile.fromPath(
-          "doc",
-          addOrg.getDoc,
-          filename: '${addOrg.getName}.pdf',
-        ),
-      );
+      if (addOrg.getDoc.isNotEmpty) {
+        request.files.add(
+          await http.MultipartFile.fromPath(
+            "doc",
+            addOrg.getDoc,
+            filename: '${addOrg.getName}.pdf',
+          ),
+        );
+      }
       request.fields['reg_no'] = addOrg.getRegNo;
+      request.fields['end_date'] = '';
 
       var response = await request.send();
       var resData = await response.stream.toBytes();

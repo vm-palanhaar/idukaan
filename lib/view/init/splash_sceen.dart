@@ -21,8 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void getUserLoggedIn() async {
     AuthCtrl ctrl = Provider.of<AuthCtrl>(context, listen: false);
-    ctrl.readAllKeys();
-    await ctrl.getUserLoggedInLocal();
+    await ctrl.getUserLoggedIn(context: context);
     if (ctrl.userLoggedIn) {
       navigateToMainScreen();
     } else {

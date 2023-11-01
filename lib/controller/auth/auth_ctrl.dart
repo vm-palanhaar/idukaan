@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:idukaan/controller/auth/auth_ctrl_api.dart';
 import 'package:idukaan/controller/auth/auth_ctrl_mdl.dart';
+import 'package:idukaan/view/init/init_view.dart';
 
 class AuthCtrl extends AuthCtrlMdl {
+  BuildContext? context;
   final AuthCtrlApi _authApi = AuthCtrlApi();
+
+  AuthCtrl({this.context});
 
   // read all key-value
   Future<void> readAllKeys() async {
@@ -26,7 +30,6 @@ class AuthCtrl extends AuthCtrlMdl {
         aOptions: getAndroidOptions(),
       );
     }
-    readAllKeys();
     userLoggedIn = false;
   }
 
@@ -52,41 +55,40 @@ class AuthCtrl extends AuthCtrlMdl {
     );
   }
 
-  Future<void> getUserLoggedInLocal() async {
+  Future<void> getUserLoggedIn({
+    required BuildContext context,
+  }) async {
+    this.context = context;
     String? token = await readKey(key: AppKey.token.key);
     if (token != null) {
-      userLoggedIn = true;
+      appKeys[AppKey.token.key] = token;
+      await getUserLoggedInApi();
       return;
     }
     userLoggedIn = false;
   }
 
-  Future<void> getUserLoggedInApi({
-    required BuildContext context,
-  }) async {
+  Future<void> getUserLoggedInApi() async {
     if (appKeys[AppKey.token.key] != null) {
-      String token = appKeys[AppKey.token.key]!;
-      userLoggedInRes = await _authApi.getUserLoggedInValidApi(
-        context: context,
-        token: token,
+      String res = await _authApi.getUserLoggedInValidApi(
+        context: context!,
+        token: appKeys[AppKey.token.key]!,
         showError: true,
       );
+      if (res.isNotEmpty) {
+        userLoggedIn = true;
+        await writeKey(key: AppKey.token.key, value: res);
+        await readAllKeys();
+        return;
+      }
     }
-    if (userLoggedInRes != null) {
-      await writeKey(
-        key: AppKey.firstName.key,
-        value: userLoggedInRes!.firstName,
-      );
-      await writeKey(
-        key: AppKey.lastName.key,
-        value: userLoggedInRes!.lastName,
-      );
-      await writeKey(
-        key: AppKey.username.key,
-        value: userLoggedInRes!.username,
-      );
-      userLoggedInRes = null;
-      userLoggedIn = true;
-    }
+    userLoggedIn = false;
+  }
+
+  Future<void> postUserLogout({
+    required BuildContext context,
+  }) async {
+    deleteAllKeys();
+    Navigator.pushNamedAndRemoveUntil(context, InitView.id, (route) => false);
   }
 }
