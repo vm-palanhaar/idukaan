@@ -103,7 +103,7 @@ class _IrShopOptsScreenState extends State<IrShopOptsScreen> {
                   icon: IrShopOptUtil.info.icon,
                   title: IrShopOptUtil.info.name,
                   onTap: () {
-                    showIrShopVerMsg(pageId: IrShopInfoScreen.id);
+                    Navigator.pushNamed(context, IrShopInfoScreen.id);
                   },
                 ),
                 OptWidget(
