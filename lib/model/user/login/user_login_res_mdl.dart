@@ -18,7 +18,7 @@ class UserLoginResMdl {
 
   factory UserLoginResMdl.success(Map<String, dynamic> json) {
     return UserLoginResMdl(
-      userSObj: UserLoginSObjResMdl.fromJson(json['user']),
+      userSObj: UserLoginSObjResMdl.fromJson(json['userData']),
       token: json['token'] as String,
       message: json['message'] as String,
       userFObj: null,

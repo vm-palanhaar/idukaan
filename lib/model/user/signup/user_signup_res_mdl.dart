@@ -16,7 +16,7 @@ class UserSignupResMdl {
 
   factory UserSignupResMdl.success(Map<String, dynamic> json) {
     return UserSignupResMdl(
-      userSObj: UserSignupSObjResMdl.fromJson(json['user']),
+      userSObj: UserSignupSObjResMdl.fromJson(json['userData']),
       message: json['message'] as String,
       userFObj: null,
     );

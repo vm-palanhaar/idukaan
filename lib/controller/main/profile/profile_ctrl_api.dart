@@ -25,7 +25,7 @@ class ProfileCtrlApi extends HandleErrorsApi {
       );
       var resDecode = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        res = ProfileInfoResMdl.fromJson(resDecode['user']);
+        res = ProfileInfoResMdl.fromJson(resDecode['userData']);
       } else {
         handleErrors(statusCode: response.statusCode);
       }

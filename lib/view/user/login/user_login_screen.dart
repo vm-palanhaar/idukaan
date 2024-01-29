@@ -113,7 +113,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                           );
                           if (ctrl.userLoginRes != null) {
                             if (ctrl.userLoginRes!.userSObj != null &&
-                                ctrl.userLoginRes!.userSObj!.isVer) {
+                                ctrl.userLoginRes!.userSObj!.isKyc) {
                               _successResponseUserVerified(
                                 message: ctrl.userLoginRes!.message,
                               );

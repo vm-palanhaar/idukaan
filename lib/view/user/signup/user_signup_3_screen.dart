@@ -20,6 +20,12 @@ class UserSignup3Screen extends StatefulWidget {
 }
 
 class _UserSignup3ScreenState extends State<UserSignup3Screen> {
+
+  @override
+  void initState() {
+    Provider.of<UserCtrl>(context, listen: false).userSignUpRes = null;
+    super.initState();
+  }
   void _successResponse({
     required String firstName,
     required String message,

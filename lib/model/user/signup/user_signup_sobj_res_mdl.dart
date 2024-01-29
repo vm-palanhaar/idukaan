@@ -15,9 +15,9 @@ class UserSignupSObjResMdl {
 
   factory UserSignupSObjResMdl.fromJson(Map<String, dynamic> json) {
     return UserSignupSObjResMdl(
-      firstName: json["first_name"] as String,
-      lastName: json["last_name"] as String,
-      contactNo: json["contact_no"] as String,
+      firstName: json["firstName"] as String,
+      lastName: json["lastName"] as String,
+      contactNo: json["contactNo"] as String,
       email: json["email"] as String,
       username: json["username"] as String,
     );

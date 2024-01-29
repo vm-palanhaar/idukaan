@@ -19,9 +19,9 @@ class UserCtrlApi {
     var response = await http.post(
       Uri.parse(UserApiUri.signup.uri),
       body: {
-        'first_name': userSignupReq.getFirstName,
-        'last_name': userSignupReq.getLastName,
-        'contact_no': userSignupReq.getContactNo,
+        'firstName': userSignupReq.getFirstName,
+        'lastName': userSignupReq.getLastName,
+        'contactNo': userSignupReq.getContactNo,
         'email': userSignupReq.getEmail,
         'username': userSignupReq.getUsername,
         'password': userSignupReq.getPwd,

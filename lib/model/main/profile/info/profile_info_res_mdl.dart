@@ -15,11 +15,11 @@ class ProfileInfoResMdl {
 
   factory ProfileInfoResMdl.fromJson(Map<String, dynamic> json) {
     return ProfileInfoResMdl(
-      fName: json['first_name'] as String,
-      lName: json['last_name'] as String,
+      fName: json['firstName'] as String,
+      lName: json['lastName'] as String,
       userName: json['username'] as String,
       email: json['email'] as String,
-      contactNo: json['contact_no'] as String,
+      contactNo: json['contactNo'] as String,
     );
   }
 }
