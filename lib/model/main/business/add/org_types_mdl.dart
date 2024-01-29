@@ -20,9 +20,9 @@ class OrgTypesMdl {
       id: json["id"] as String,
       entity: json["entity"] as String,
       docType: json["doc"] as String,
-      docNo: json["doc_no"] as String,
+      docNo: json["docNo"] as String,
       desc: json["desc"] as String,
-      isDoc: json["is_doc"] as bool,
+      isDoc: json["isDoc"] as bool,
     );
   }
 }

@@ -2,14 +2,14 @@ class OrgListObjResMdl {
   final String id;
   final String name;
   final bool isActive;
-  final bool isVer;
+  final bool isKyo;
   final bool empMng;
 
   OrgListObjResMdl({
     required this.id,
     required this.name,
     required this.isActive,
-    required this.isVer,
+    required this.isKyo,
     required this.empMng,
   });
 
@@ -17,9 +17,9 @@ class OrgListObjResMdl {
     return OrgListObjResMdl(
       id: json["id"] as String,
       name: json["name"] as String,
-      isActive: json["is_active"] as bool,
-      isVer: json["is_verified"] as bool,
-      empMng: json["emp_manager"] as bool,
+      isActive: json["isActive"] as bool,
+      isKyo: json["isKyo"] as bool,
+      empMng: json["isMng"] as bool,
     );
   }
 }

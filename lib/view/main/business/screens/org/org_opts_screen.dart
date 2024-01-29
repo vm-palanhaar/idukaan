@@ -45,7 +45,7 @@ class _OrgOptsScreenState extends State<OrgOptsScreen> {
   void showOrgVerMsg({
     required String pageId,
   }) {
-    if (!ctrl.org!.isVer) {
+    if (!ctrl.org!.isKyo) {
       showXDialog(
         title: 'Attention Required',
         text: ctrl.orgList!.isVerMsg,

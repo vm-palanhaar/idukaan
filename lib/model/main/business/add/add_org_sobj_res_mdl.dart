@@ -1,5 +1,5 @@
 class AddOrgSObjResMdl {
-  final int id;
+  final String id;
   final String name;
   final int type;
 
@@ -11,7 +11,7 @@ class AddOrgSObjResMdl {
 
   factory AddOrgSObjResMdl.fromJson(Map<String, dynamic> json) {
     return AddOrgSObjResMdl(
-      id: json["id"] as int,
+      id: json["id"] as String,
       name: json["name"] as String,
       type: json["type"] as int,
     );

@@ -57,7 +57,7 @@ class _OrgListOLSWidgetState extends State<OrgListOLSWidget> {
                           textDirection: TextDirection.ltr,
                         ),
                         trailing: VerifiedWidget(
-                          isVer: ctrl.orgList!.org.elementAt(index).isVer,
+                          isVer: ctrl.orgList!.org.elementAt(index).isKyo,
                         ),
                         onTap: () {
                           ctrl.org = ctrl.orgList!.org.elementAt(index);

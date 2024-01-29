@@ -13,14 +13,14 @@ class OrgListResMdl {
   });
 
   factory OrgListResMdl.success(Map<String, dynamic> json) {
-    var list = json['org_list'] as List;
+    var list = json['orgList'] as List;
     return OrgListResMdl(
       org: list.map<OrgListObjResMdl>(
         (json) {
           return OrgListObjResMdl.fromJson(json);
         },
       ).toList(),
-      isVerMsg: json['is_verified_msg'] as String,
+      isVerMsg: json['isKyoFalseMsg'] as String,
       error: null,
     );
   }

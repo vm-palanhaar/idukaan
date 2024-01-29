@@ -36,7 +36,7 @@ class BusinessCtrlApi extends HandleErrorsApi {
       );
       var resDecode = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        list = resDecode.map<OrgTypesMdl>(
+        list = resDecode['orgTypeList'].map<OrgTypesMdl>(
           (json) {
             return OrgTypesMdl.fromJson(json);
           },
@@ -74,8 +74,8 @@ class BusinessCtrlApi extends HandleErrorsApi {
           ),
         );
       }
-      request.fields['reg_no'] = addOrg.getRegNo;
-      request.fields['end_date'] = '';
+      request.fields['regNo'] = addOrg.getRegNo;
+      request.fields['docEndDate'] = '';
 
       var response = await request.send();
       var resData = await response.stream.toBytes();

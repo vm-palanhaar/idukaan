@@ -14,7 +14,7 @@ class AddOrgResMdl {
 
   factory AddOrgResMdl.success(Map<String, dynamic> json) {
     return AddOrgResMdl(
-      org: AddOrgSObjResMdl.fromJson(json['org']),
+      org: AddOrgSObjResMdl.fromJson(json['orgData']),
       message: json["message"] as String,
       error: null,
     );
