@@ -17,9 +17,9 @@ class OrgEmpListSObjResMdl {
     return OrgEmpListSObjResMdl(
       id: json["id"] as String,
       name: json["name"] as String,
-      isMng: json["is_manager"] as bool,
+      isMng: json["isMng"] as bool,
       exp: json["exp"] as String,
-      jDate: json["join_date"] as String,
+      jDate: json["joinDate"] as String,
     );
   }
 }

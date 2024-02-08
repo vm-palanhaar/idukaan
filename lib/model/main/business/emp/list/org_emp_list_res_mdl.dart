@@ -13,9 +13,9 @@ class OrgEmpListResMdl {
   });
 
   factory OrgEmpListResMdl.success(Map<String, dynamic> json) {
-    var list = json['org_emp_list'] as List;
+    var list = json['orgEmpList'] as List;
     return OrgEmpListResMdl(
-      orgId: json["org_id"] as String,
+      orgId: json["orgId"] as String,
       emp: list
           .map<OrgEmpListSObjResMdl>(
               (json) => OrgEmpListSObjResMdl.fromJson(json))

@@ -66,7 +66,7 @@ class _OrgEmpListOELSWidgetState extends State<OrgEmpListOELSWidget> {
       context: context,
       builder: (BuildContext context) {
         return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.5,
+          height: MediaQuery.of(context).size.height * 0.66,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[

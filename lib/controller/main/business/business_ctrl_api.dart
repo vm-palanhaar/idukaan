@@ -232,8 +232,8 @@ class BusinessCtrlApi extends HandleErrorsApi {
         Uri.parse(uri),
         body: {
           'id': updateEmp.getId,
-          'is_manager': updateEmp.getIsMng,
-          'join_date': updateEmp.getJDate,
+          'isMng': updateEmp.getIsMng,
+          'joinDate': updateEmp.getJDate,
         },
         headers: {
           'Authorization': 'Token $_token',

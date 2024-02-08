@@ -19,7 +19,7 @@ class UpdateOrgEmpResMdl {
   factory UpdateOrgEmpResMdl.success(Map<String, dynamic> json) {
     return UpdateOrgEmpResMdl(
       empId: json["id"] as String,
-      orgId: json["org_id"] as String,
+      orgId: json["orgId"] as String,
       emp: OrgEmpListSObjResMdl.fromJson(json['org_emp']),
       msg: json["message"] as String,
       error: null,
